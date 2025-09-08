@@ -2,7 +2,7 @@ export const armenianTexts = {
   // Welcome Screen
   appTitle: "MafClub 36",
   play: "Խաղալ",
-  producedBy: "Բարի գալուստ, լավ խաղ",
+  producedBy: "Բարի գալուստ, մաղթում ենք լավ խաղ",
 
   // Player Configuration
   setPlayers: "Սահմանել Խաղացողներ",
