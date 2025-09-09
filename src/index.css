@@ -176,6 +176,7 @@
       padding-right: max(0px, env(safe-area-inset-right));
       padding-top: 0;
       padding-bottom: 0;
+      margin-bottom: 0;
     }
   }
 
@@ -214,6 +215,14 @@
     body, html {
       overscroll-behavior: none;
       -webkit-overflow-scrolling: touch;
+      /* Remove any bottom spacing that could cause white border */
+      padding-bottom: 0 !important;
+      margin-bottom: 0 !important;
+    }
+    
+    /* Force all containers to have no bottom spacing */
+    .pwa-container, .screen-container, .content-wrapper {
+      margin-bottom: 0 !important;
     }
   }
 
@@ -260,8 +269,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    /* Add padding for safe areas and general spacing */
-    padding: max(env(safe-area-inset-top), 1rem) max(env(safe-area-inset-right), 1rem) max(env(safe-area-inset-bottom), 1rem) max(env(safe-area-inset-left), 1rem);
+    /* Add padding for safe areas and general spacing - no bottom padding */
+    padding: max(env(safe-area-inset-top), 1rem) max(env(safe-area-inset-right), 1rem) 0 max(env(safe-area-inset-left), 1rem);
     /* Ensure content fits */
     box-sizing: border-box;
     /* Ensure proper background handling */
@@ -345,6 +354,10 @@
     /* Ensure gradient extends to all edges */
     margin: 0;
     padding: 0;
+    /* Force gradient to cover entire screen */
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+    min-height: 100dvh;
   }
 
   /* PWA specific gradient fixes */
@@ -360,6 +373,8 @@
     .screen-container {
       /* Adjust padding to account for black status bar */
       padding-top: max(env(safe-area-inset-top, 44px), 1rem);
+      /* Remove bottom padding to eliminate white border */
+      padding-bottom: 0 !important;
     }
   }
 
@@ -370,7 +385,7 @@
     }
     
     .screen-container {
-      padding: max(env(safe-area-inset-top), 0.75rem) max(env(safe-area-inset-right), 0.75rem) max(env(safe-area-inset-bottom), 0.75rem) max(env(safe-area-inset-left), 0.75rem);
+      padding: max(env(safe-area-inset-top), 0.75rem) max(env(safe-area-inset-right), 0.75rem) 0 max(env(safe-area-inset-left), 0.75rem);
     }
   }
 
