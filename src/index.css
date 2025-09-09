@@ -171,8 +171,11 @@
   /* iOS PWA specific styles */
   @supports (padding: max(0px)) {
     body {
+      /* Only add side padding, no top/bottom padding */
       padding-left: max(0px, env(safe-area-inset-left));
       padding-right: max(0px, env(safe-area-inset-right));
+      padding-top: 0;
+      padding-bottom: 0;
     }
   }
 
@@ -211,6 +214,22 @@
     body, html {
       overscroll-behavior: none;
       -webkit-overflow-scrolling: touch;
+    }
+    
+    /* Remove any bottom borders/padding in PWA mode */
+    body {
+      padding-bottom: 0 !important;
+      margin-bottom: 0 !important;
+    }
+    
+    /* Ensure pwa-container extends to bottom edge */
+    .pwa-container {
+      padding-bottom: 0 !important;
+      margin-bottom: 0 !important;
+      /* Force full height coverage */
+      height: 100vh;
+      height: -webkit-fill-available;
+      height: 100dvh;
     }
   }
 
@@ -254,8 +273,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    /* Add padding for safe areas and general spacing */
-    padding: max(env(safe-area-inset-top), 1rem) max(env(safe-area-inset-right), 1rem) max(env(safe-area-inset-bottom), 1rem) max(env(safe-area-inset-left), 1rem);
+    /* Add padding for safe areas and general spacing - only top padding for PWA status bar */
+    padding: max(env(safe-area-inset-top), 1rem) max(env(safe-area-inset-right), 1rem) 0 max(env(safe-area-inset-left), 1rem);
     /* Ensure content fits */
     box-sizing: border-box;
     /* Ensure proper background handling */
@@ -337,6 +356,32 @@
     animation: gradientMove 8s ease-in-out infinite alternate;
     /* Fallback for older browsers */
     background-color: #000;
+    /* Ensure gradient extends to all edges */
+    margin: 0;
+    padding: 0;
+  }
+
+  /* PWA specific gradient fixes */
+  @media screen and (display-mode: standalone) {
+    .animated-gradient-bg {
+      /* Extend gradient to cover entire viewport */
+      min-height: 100vh;
+      min-height: -webkit-fill-available;
+      min-height: 100dvh;
+      /* Remove any borders or margins */
+      border: none;
+      outline: none;
+      /* Ensure full coverage */
+      position: relative;
+    }
+    
+    /* Remove all body margins and padding in PWA mode */
+    html, body {
+      margin: 0 !important;
+      padding: 0 !important;
+      border: none !important;
+      outline: none !important;
+    }
   }
 
   /* Responsive text sizing improvements */
@@ -346,7 +391,15 @@
     }
     
     .screen-container {
-      padding: max(env(safe-area-inset-top), 0.75rem) max(env(safe-area-inset-right), 0.75rem) max(env(safe-area-inset-bottom), 0.75rem) max(env(safe-area-inset-left), 0.75rem);
+      padding: max(env(safe-area-inset-top), 0.75rem) max(env(safe-area-inset-right), 0.75rem) 0 max(env(safe-area-inset-left), 0.75rem);
+    }
+  }
+
+  /* PWA mobile specific fixes */
+  @media (max-width: 640px) and (display-mode: standalone) {
+    .screen-container {
+      /* No bottom padding in PWA mode on mobile */
+      padding: max(env(safe-area-inset-top), 0.75rem) max(env(safe-area-inset-right), 0.75rem) 0 max(env(safe-area-inset-left), 0.75rem);
     }
   }
 
