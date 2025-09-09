@@ -148,208 +148,47 @@
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
     font-feature-settings: "kern" 1;
-    /* Ensure body takes full height */
+    /* Simple full height */
     min-height: 100vh;
-    min-height: -webkit-fill-available;
-    min-height: 100dvh;
-    /* Prevent overscroll bounce on iOS */
-    overscroll-behavior: none;
-    /* Allow text selection for better UX */
-    -webkit-user-select: text;
-    -moz-user-select: text;
-    -ms-user-select: text;
-    user-select: text;
-    /* Ensure proper positioning */
-    position: relative;
+    /* Basic positioning */
     margin: 0;
     padding: 0;
-    /* Allow scrolling when needed */
-    overflow-x: hidden;
-    overflow-y: auto;
   }
 
-  /* iOS PWA specific styles */
-  @supports (padding: max(0px)) {
-    body {
-      /* Only add side padding, no top/bottom padding */
-      padding-left: max(0px, env(safe-area-inset-left));
-      padding-right: max(0px, env(safe-area-inset-right));
-      padding-top: 0;
-      padding-bottom: 0;
-      margin-bottom: 0;
-    }
-  }
-  
-  /* PWA mode: Remove bottom spacing to eliminate white border */
-  @media screen and (display-mode: standalone) {
-    body {
-      padding-bottom: 0 !important;
-      margin-bottom: 0 !important;
-    }
-  }
-  
-  /* Mobile Safari specific fixes */
-  @supports (-webkit-touch-callout: none) {
-    .screen-container {
-      /* Ensure proper height on iOS Safari */
-      min-height: -webkit-fill-available;
-    }
-    
-    .animated-gradient-bg {
-      /* Ensure gradient shows on iOS Safari */
-      min-height: -webkit-fill-available;
-    }
-  }
-  
-  /* General mobile browser fixes */
-  @media (max-width: 768px) {
-    .screen-container {
-      /* Ensure content is visible on mobile */
-      min-height: 100vh;
-      min-height: -webkit-fill-available;
-      min-height: 100dvh;
-      /* Force visibility */
-      display: flex !important;
-      visibility: visible !important;
-    }
-    
-    .animated-gradient-bg {
-      /* Ensure gradient is visible on mobile */
-      min-height: 100vh;
-      min-height: -webkit-fill-available;
-      min-height: 100dvh;
-      /* Force visibility */
-      display: block !important;
-      visibility: visible !important;
-      /* Ensure it covers the screen */
-      width: 100vw;
-      height: 100vh;
-      height: -webkit-fill-available;
-    }
-    
-    /* Ensure content wrapper is visible */
-    .content-wrapper {
-      display: flex !important;
-      visibility: visible !important;
-    }
-  }
 
-  /* Cross-platform PWA styles when launched from home screen */
-  @media screen and (display-mode: standalone) {
-    body {
-      /* Ensure full screen experience */
-      -webkit-touch-callout: none;
-      -webkit-tap-highlight-color: transparent;
-    }
-    
-    /* PWA status bar fix - only apply black to the top area */
-    .pwa-container::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: env(safe-area-inset-top, 0px);
-      background-color: #000000;
-      z-index: 1000;
-      pointer-events: none;
-    }
-    
-    /* Ensure content is visible above status bar */
-    .screen-container {
-      z-index: 1;
-      position: relative;
-    }
-    
-    /* Prevent zoom on Android when focusing inputs */
-    input, textarea, select {
-      font-size: 16px;
-    }
-    
-    /* Hide scrollbars in PWA mode for cleaner look */
-    ::-webkit-scrollbar {
-      display: none;
-    }
-    
-    /* Ensure no overscroll bounce */
-    body, html {
-      overscroll-behavior: none;
-      -webkit-overflow-scrolling: touch;
-    }
-  }
 
-  /* iOS Safari specific fixes */
-  @supports (-webkit-touch-callout: none) {
-    body {
-      /* iOS Safari specific height fix */
-      min-height: -webkit-fill-available;
-    }
-    
-    /* Fix for iOS Safari black screen issue */
-    .screen-container {
-      min-height: -webkit-fill-available;
-      height: -webkit-fill-available;
-    }
-    
-    .animated-gradient-bg {
-      min-height: -webkit-fill-available;
-      height: -webkit-fill-available;
-    }
-  }
 
-  /* Cross-platform PWA container optimizations */
+  /* Simple PWA container */
   .pwa-container {
-    /* Take full height */
     min-height: 100vh;
-    min-height: -webkit-fill-available;
-    min-height: 100dvh;
-    /* Use flexbox for proper content distribution */
     display: flex;
     flex-direction: column;
-    /* Ensure proper positioning */
     position: relative;
-    /* Prevent any gaps */
     margin: 0;
     padding: 0;
-    /* Allow gradient backgrounds to show through */
     background: transparent;
-    /* Allow scrolling when content overflows */
-    overflow-x: hidden;
-    overflow-y: auto;
   }
 
-  /* Screen container for individual screens */
+  /* Simple screen container */
   .screen-container {
-    /* Take full available height */
     min-height: 100vh;
-    min-height: -webkit-fill-available;
-    min-height: 100dvh;
-    /* Use flexbox for centering */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    /* Add padding for safe areas and general spacing */
-    padding: max(env(safe-area-inset-top), 1rem) max(env(safe-area-inset-right), 1rem) max(env(safe-area-inset-bottom), 1rem) max(env(safe-area-inset-left), 1rem);
-    /* Ensure content fits */
+    padding: 1rem;
     box-sizing: border-box;
-    /* Ensure proper background handling */
     position: relative;
-    /* Prevent scrolling for full-screen experience */
-    overflow: hidden;
   }
 
-  /* Content wrapper for proper sizing */
+  /* Simple content wrapper */
   .content-wrapper {
-    /* Use available space efficiently */
     width: 100%;
     max-width: 100%;
-    /* Center content */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    /* Add some padding */
     padding: 1rem;
     box-sizing: border-box;
   }
@@ -404,113 +243,13 @@
     height: auto;
   }
 
-  /* Better gradient rendering across browsers */
+  /* Simple gradient background */
   .animated-gradient-bg {
     background: linear-gradient(120deg, #7f1d1d 0%, #1e293b 50%, #000 100%);
     background-size: 200% 200%;
     animation: gradientMove 8s ease-in-out infinite alternate;
-    /* Fallback for older browsers */
     background-color: #000;
-    /* Ensure gradient extends to all edges */
-    margin: 0;
-    padding: 0;
-    /* Force gradient to cover entire screen */
     min-height: 100vh;
-    min-height: -webkit-fill-available;
-    min-height: 100dvh;
-    /* Ensure visibility on mobile browsers */
-    position: relative;
-    z-index: 1;
   }
 
-  /* PWA specific gradient fixes */
-  @media screen and (display-mode: standalone) {
-    .animated-gradient-bg {
-      /* Extend gradient to cover entire viewport */
-      min-height: 100vh;
-      min-height: -webkit-fill-available;
-      min-height: 100dvh;
-    }
-    
-    /* Ensure screen container accounts for status bar in PWA */
-    .screen-container {
-      /* Adjust padding to account for black status bar */
-      padding-top: max(env(safe-area-inset-top, 44px), 1rem);
-    }
-    
-    /* Remove bottom white border in PWA mode only */
-    .screen-container {
-      padding-bottom: 0 !important;
-    }
-    
-    /* Ensure gradient extends to bottom edge */
-    .animated-gradient-bg {
-      margin-bottom: 0 !important;
-      padding-bottom: 0 !important;
-    }
-  }
-
-  /* Responsive text sizing improvements */
-  @media (max-width: 640px) {
-    .content-wrapper {
-      padding: 0.75rem;
-    }
-    
-    .screen-container {
-      padding: max(env(safe-area-inset-top), 0.75rem) max(env(safe-area-inset-right), 0.75rem) max(env(safe-area-inset-bottom), 0.75rem) max(env(safe-area-inset-left), 0.75rem);
-    }
-  }
-
-  /* High contrast mode support */
-  @media (prefers-contrast: high) {
-    .bg-black\/30 {
-      background-color: rgba(0, 0, 0, 0.8) !important;
-    }
-    
-    .border-white\/20 {
-      border-color: rgba(255, 255, 255, 0.6) !important;
-    }
-  }
-
-  /* Reduce motion for accessibility */
-  @media (prefers-reduced-motion: reduce) {
-    .animate-fade-in,
-    .animate-fade-in-slow,
-    .animated-gradient-bg {
-      animation: none !important;
-    }
-    
-    .transition-all,
-    .transition-colors,
-    .transition-transform {
-      transition: none !important;
-    }
-  }
-  
-  /* Mobile browser fallback for gradient */
-  @media (max-width: 768px) {
-    .animated-gradient-bg {
-      /* Fallback gradient for mobile browsers */
-      background: #000000;
-      background: linear-gradient(120deg, #7f1d1d 0%, #1e293b 50%, #000 100%);
-    }
-  }
-
-  /* Print styles */
-  @media print {
-    .screen-container {
-      min-height: auto !important;
-      height: auto !important;
-      overflow: visible !important;
-    }
-    
-    .animated-gradient-bg {
-      background: white !important;
-      color: black !important;
-    }
-    
-    .fixed {
-      position: static !important;
-    }
-  }
 }
