@@ -179,6 +179,14 @@
       margin-bottom: 0;
     }
   }
+  
+  /* PWA mode: Remove bottom spacing to eliminate white border */
+  @media screen and (display-mode: standalone) {
+    body {
+      padding-bottom: 0 !important;
+      margin-bottom: 0 !important;
+    }
+  }
 
   /* Cross-platform PWA styles when launched from home screen */
   @media screen and (display-mode: standalone) {
@@ -215,14 +223,6 @@
     body, html {
       overscroll-behavior: none;
       -webkit-overflow-scrolling: touch;
-      /* Remove any bottom spacing that could cause white border */
-      padding-bottom: 0 !important;
-      margin-bottom: 0 !important;
-    }
-    
-    /* Force all containers to have no bottom spacing */
-    .pwa-container, .screen-container, .content-wrapper {
-      margin-bottom: 0 !important;
     }
   }
 
@@ -261,16 +261,13 @@
     min-height: 100vh;
     min-height: -webkit-fill-available;
     min-height: 100dvh;
-    height: 100vh;
-    height: -webkit-fill-available;
-    height: 100dvh;
     /* Use flexbox for centering */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    /* Add padding for safe areas and general spacing - no bottom padding */
-    padding: max(env(safe-area-inset-top), 1rem) max(env(safe-area-inset-right), 1rem) 0 max(env(safe-area-inset-left), 1rem);
+    /* Add padding for safe areas and general spacing */
+    padding: max(env(safe-area-inset-top), 1rem) max(env(safe-area-inset-right), 1rem) max(env(safe-area-inset-bottom), 1rem) max(env(safe-area-inset-left), 1rem);
     /* Ensure content fits */
     box-sizing: border-box;
     /* Ensure proper background handling */
@@ -373,7 +370,16 @@
     .screen-container {
       /* Adjust padding to account for black status bar */
       padding-top: max(env(safe-area-inset-top, 44px), 1rem);
-      /* Remove bottom padding to eliminate white border */
+    }
+    
+    /* Remove bottom white border in PWA mode only */
+    .screen-container {
+      padding-bottom: 0 !important;
+    }
+    
+    /* Ensure gradient extends to bottom edge */
+    .animated-gradient-bg {
+      margin-bottom: 0 !important;
       padding-bottom: 0 !important;
     }
   }
@@ -385,7 +391,7 @@
     }
     
     .screen-container {
-      padding: max(env(safe-area-inset-top), 0.75rem) max(env(safe-area-inset-right), 0.75rem) 0 max(env(safe-area-inset-left), 0.75rem);
+      padding: max(env(safe-area-inset-top), 0.75rem) max(env(safe-area-inset-right), 0.75rem) max(env(safe-area-inset-bottom), 0.75rem) max(env(safe-area-inset-left), 0.75rem);
     }
   }
 
