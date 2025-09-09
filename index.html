@@ -20,14 +20,7 @@
   
   <!-- Cross-platform Theme Color -->
   <meta name="theme-color" content="#000000" />
-  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
-  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000000" />
-  <meta name="color-scheme" content="dark light" />
-  
-  <!-- Additional PWA Meta Tags -->
-  <meta name="format-detection" content="telephone=no" />
-  <meta name="apple-mobile-web-app-orientation" content="portrait" />
-  <meta name="screen-orientation" content="portrait" />
+  <meta name="color-scheme" content="dark" />
   
   <!-- Web App Manifest -->
   <link rel="manifest" href="/manifest.json" />
@@ -66,21 +59,6 @@
 <body>
   <div id="root"></div>
   <script type="module" src="/src/main.tsx"></script>
-  
-  <!-- Service Worker Registration -->
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js')
-          .then((registration) => {
-            console.log('SW registered: ', registration);
-          })
-          .catch((registrationError) => {
-            console.log('SW registration failed: ', registrationError);
-          });
-      });
-    }
-  </script>
 </body>
 
 </html>
