@@ -28,7 +28,7 @@ const GameRouter: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-red-900 via-black to-black">
+    <div className="pwa-container min-h-screen bg-gradient-to-br from-red-900 via-black to-black">
       {renderCurrentScreen()}
     </div>
   );

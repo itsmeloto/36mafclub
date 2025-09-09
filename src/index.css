@@ -127,6 +127,15 @@
     @apply border-border;
   }
 
+  html {
+    /* Ensure full height and proper safe area handling */
+    height: 100%;
+    /* Support for iOS safe areas */
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+    /* Dark theme support */
+    color-scheme: dark;
+  }
+
   body {
     @apply bg-background text-foreground;
     /* Better text rendering for Armenian text */
@@ -134,6 +143,74 @@
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
     font-feature-settings: "kern" 1;
+    /* Ensure body takes full height */
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+    min-height: 100dvh; /* Dynamic viewport height for modern browsers */
+    /* Dark background for status bar area on both platforms */
+    background-color: #000000;
+    /* Prevent overscroll bounce on iOS */
+    overscroll-behavior: none;
+    /* Prevent text selection in PWA mode */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  /* iOS PWA specific styles */
+  @supports (padding: max(0px)) {
+    body {
+      padding-left: max(0px, env(safe-area-inset-left));
+      padding-right: max(0px, env(safe-area-inset-right));
+    }
+  }
+
+  /* Cross-platform PWA styles when launched from home screen */
+  @media screen and (display-mode: standalone) {
+    body {
+      /* Ensure full screen experience */
+      -webkit-touch-callout: none;
+      -webkit-tap-highlight-color: transparent;
+      /* Prevent zoom on form inputs */
+    }
+    
+    /* Prevent zoom on Android when focusing inputs */
+    input, textarea, select {
+      font-size: 16px;
+    }
+    
+    /* Hide scrollbars in PWA mode for cleaner look */
+    ::-webkit-scrollbar {
+      display: none;
+    }
+    
+    /* Ensure no overscroll bounce */
+    body, html {
+      overscroll-behavior: none;
+      -webkit-overflow-scrolling: touch;
+    }
+  }
+
+  /* iOS Safari specific fixes */
+  @supports (-webkit-touch-callout: none) {
+    body {
+      /* iOS Safari specific height fix */
+      min-height: -webkit-fill-available;
+    }
+  }
+
+  /* Cross-platform PWA container optimizations */
+  .pwa-container {
+    /* Ensure content fills the entire viewport */
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+    min-height: 100dvh; /* Dynamic viewport height for modern browsers */
+    /* Ensure proper safe area handling */
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
   }
 
   /* Fix for Armenian text rendering issues */
