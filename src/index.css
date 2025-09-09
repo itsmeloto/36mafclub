@@ -187,6 +187,52 @@
       margin-bottom: 0 !important;
     }
   }
+  
+  /* Mobile Safari specific fixes */
+  @supports (-webkit-touch-callout: none) {
+    .screen-container {
+      /* Ensure proper height on iOS Safari */
+      min-height: -webkit-fill-available;
+    }
+    
+    .animated-gradient-bg {
+      /* Ensure gradient shows on iOS Safari */
+      min-height: -webkit-fill-available;
+    }
+  }
+  
+  /* General mobile browser fixes */
+  @media (max-width: 768px) {
+    .screen-container {
+      /* Ensure content is visible on mobile */
+      min-height: 100vh;
+      min-height: -webkit-fill-available;
+      min-height: 100dvh;
+      /* Force visibility */
+      display: flex !important;
+      visibility: visible !important;
+    }
+    
+    .animated-gradient-bg {
+      /* Ensure gradient is visible on mobile */
+      min-height: 100vh;
+      min-height: -webkit-fill-available;
+      min-height: 100dvh;
+      /* Force visibility */
+      display: block !important;
+      visibility: visible !important;
+      /* Ensure it covers the screen */
+      width: 100vw;
+      height: 100vh;
+      height: -webkit-fill-available;
+    }
+    
+    /* Ensure content wrapper is visible */
+    .content-wrapper {
+      display: flex !important;
+      visibility: visible !important;
+    }
+  }
 
   /* Cross-platform PWA styles when launched from home screen */
   @media screen and (display-mode: standalone) {
@@ -207,6 +253,12 @@
       background-color: #000000;
       z-index: 1000;
       pointer-events: none;
+    }
+    
+    /* Ensure content is visible above status bar */
+    .screen-container {
+      z-index: 1;
+      position: relative;
     }
     
     /* Prevent zoom on Android when focusing inputs */
@@ -231,6 +283,17 @@
     body {
       /* iOS Safari specific height fix */
       min-height: -webkit-fill-available;
+    }
+    
+    /* Fix for iOS Safari black screen issue */
+    .screen-container {
+      min-height: -webkit-fill-available;
+      height: -webkit-fill-available;
+    }
+    
+    .animated-gradient-bg {
+      min-height: -webkit-fill-available;
+      height: -webkit-fill-available;
     }
   }
 
@@ -355,6 +418,9 @@
     min-height: 100vh;
     min-height: -webkit-fill-available;
     min-height: 100dvh;
+    /* Ensure visibility on mobile browsers */
+    position: relative;
+    z-index: 1;
   }
 
   /* PWA specific gradient fixes */
@@ -418,6 +484,15 @@
     .transition-colors,
     .transition-transform {
       transition: none !important;
+    }
+  }
+  
+  /* Mobile browser fallback for gradient */
+  @media (max-width: 768px) {
+    .animated-gradient-bg {
+      /* Fallback gradient for mobile browsers */
+      background: #000000;
+      background: linear-gradient(120deg, #7f1d1d 0%, #1e293b 50%, #000 100%);
     }
   }
 
