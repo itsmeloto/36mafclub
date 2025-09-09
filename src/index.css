@@ -135,6 +135,8 @@
     /* Prevent any gaps */
     margin: 0;
     padding: 0;
+    /* Prevent scrolling */
+    overflow: hidden;
   }
 
   body {
@@ -144,10 +146,10 @@
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
     font-feature-settings: "kern" 1;
-    /* Ensure body takes full height including safe areas */
-    min-height: calc(100vh + env(safe-area-inset-top) + env(safe-area-inset-bottom));
-    min-height: calc(-webkit-fill-available + env(safe-area-inset-top) + env(safe-area-inset-bottom));
-    min-height: calc(100dvh + env(safe-area-inset-top) + env(safe-area-inset-bottom));
+    /* Ensure body takes full height */
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+    min-height: 100dvh;
     /* Prevent overscroll bounce on iOS */
     overscroll-behavior: none;
     /* Prevent text selection in PWA mode */
@@ -160,9 +162,11 @@
     margin: 0;
     padding: 0;
     /* Ensure full coverage */
-    height: calc(100vh + env(safe-area-inset-top) + env(safe-area-inset-bottom));
-    height: calc(-webkit-fill-available + env(safe-area-inset-top) + env(safe-area-inset-bottom));
-    height: calc(100dvh + env(safe-area-inset-top) + env(safe-area-inset-bottom));
+    height: 100vh;
+    height: -webkit-fill-available;
+    height: 100dvh;
+    /* Prevent scrolling */
+    overflow: hidden;
   }
 
   /* iOS PWA specific styles */
@@ -221,32 +225,34 @@
 
   /* Cross-platform PWA container optimizations */
   .pwa-container {
-    /* Take full height including safe areas */
-    min-height: calc(100vh + env(safe-area-inset-top) + env(safe-area-inset-bottom));
-    min-height: calc(-webkit-fill-available + env(safe-area-inset-top) + env(safe-area-inset-bottom));
-    min-height: calc(100dvh + env(safe-area-inset-top) + env(safe-area-inset-bottom));
+    /* Take full height */
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+    min-height: 100dvh;
     /* Use flexbox for proper content distribution */
     display: flex;
     flex-direction: column;
     /* Ensure proper positioning */
     position: relative;
     /* Ensure full coverage to prevent bottom border */
-    height: calc(100vh + env(safe-area-inset-top) + env(safe-area-inset-bottom));
-    height: calc(-webkit-fill-available + env(safe-area-inset-top) + env(safe-area-inset-bottom));
-    height: calc(100dvh + env(safe-area-inset-top) + env(safe-area-inset-bottom));
+    height: 100vh;
+    height: -webkit-fill-available;
+    height: 100dvh;
     /* Prevent any gaps */
     margin: 0;
     padding: 0;
     /* Allow gradient backgrounds to show through */
     background: transparent;
+    /* Prevent scrolling */
+    overflow: hidden;
   }
 
   /* Screen container for individual screens */
   .screen-container {
-    /* Take full available height including safe areas */
-    min-height: calc(100vh + env(safe-area-inset-top) + env(safe-area-inset-bottom));
-    min-height: calc(-webkit-fill-available + env(safe-area-inset-top) + env(safe-area-inset-bottom));
-    min-height: calc(100dvh + env(safe-area-inset-top) + env(safe-area-inset-bottom));
+    /* Take full available height */
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+    min-height: 100dvh;
     /* Use flexbox for centering */
     display: flex;
     flex-direction: column;
@@ -259,9 +265,11 @@
     /* Ensure proper background handling */
     position: relative;
     /* Ensure full coverage */
-    height: calc(100vh + env(safe-area-inset-top) + env(safe-area-inset-bottom));
-    height: calc(-webkit-fill-available + env(safe-area-inset-top) + env(safe-area-inset-bottom));
-    height: calc(100dvh + env(safe-area-inset-top) + env(safe-area-inset-bottom));
+    height: 100vh;
+    height: -webkit-fill-available;
+    height: 100dvh;
+    /* Prevent scrolling */
+    overflow: hidden;
   }
 
   /* Content wrapper for proper sizing */
