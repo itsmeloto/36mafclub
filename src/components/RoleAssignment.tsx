@@ -49,7 +49,7 @@ const RoleAssignment: React.FC = () => {
         case 'sheriff':
           return (
             <div className="flex items-center justify-center animate-bounce">
-              <div className="text-4xl mr-4 animate-pulse">🔫</div>
+              <div className="text-4xl mr-4 animate-pulse">🛡️</div>
             </div>
           );
         case 'black':
