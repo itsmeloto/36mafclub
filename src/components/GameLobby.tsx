@@ -128,14 +128,16 @@ const GameLobby: React.FC = () => {
           paddingBottom: '6rem' // Extra padding for fixed navigation
         }}
       >
-      {/* Header with Info Button */}
-      <div className="relative text-center mb-4 sm:mb-8">
-        <button
-          onClick={() => setShowInfo(true)}
-          className="absolute top-0 right-0 p-1.5 sm:p-3 bg-gray-700/50 hover:bg-gray-600/50 backdrop-blur-sm border border-gray-600/50 rounded-lg sm:rounded-xl transition-all duration-200 hover:scale-105"
-        >
-          <Info className="w-3 h-3 sm:w-5 sm:h-5 text-gray-300" />
-        </button>
+      {/* Info Button - Fixed to top right */}
+      <button
+        onClick={() => setShowInfo(true)}
+        className="fixed top-4 right-4 z-40 p-2 sm:p-3 bg-gray-800/80 hover:bg-gray-700/80 backdrop-blur-md border border-gray-600/50 rounded-xl transition-all duration-200 hover:scale-105 shadow-lg"
+      >
+        <Info className="w-4 h-4 sm:w-5 sm:h-5 text-gray-300" />
+      </button>
+
+      {/* Header */}
+      <div className="text-center mb-4 sm:mb-8">
         
         <h1 className="text-xl sm:text-4xl font-bold bg-gradient-to-r from-red-400 to-red-600 bg-clip-text text-transparent mb-1 sm:mb-2 armenian-text">
           {armenianTexts.gameLobby}
