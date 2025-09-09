@@ -215,22 +215,6 @@
       overscroll-behavior: none;
       -webkit-overflow-scrolling: touch;
     }
-    
-    /* Remove any bottom borders/padding in PWA mode */
-    body {
-      padding-bottom: 0 !important;
-      margin-bottom: 0 !important;
-    }
-    
-    /* Ensure pwa-container extends to bottom edge */
-    .pwa-container {
-      padding-bottom: 0 !important;
-      margin-bottom: 0 !important;
-      /* Force full height coverage */
-      height: 100vh;
-      height: -webkit-fill-available;
-      height: 100dvh;
-    }
   }
 
   /* iOS Safari specific fixes */
@@ -268,20 +252,22 @@
     min-height: 100vh;
     min-height: -webkit-fill-available;
     min-height: 100dvh;
+    height: 100vh;
+    height: -webkit-fill-available;
+    height: 100dvh;
     /* Use flexbox for centering */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    /* Add padding for safe areas and general spacing - only top padding for PWA status bar */
-    padding: max(env(safe-area-inset-top), 1rem) max(env(safe-area-inset-right), 1rem) 0 max(env(safe-area-inset-left), 1rem);
+    /* Add padding for safe areas and general spacing */
+    padding: max(env(safe-area-inset-top), 1rem) max(env(safe-area-inset-right), 1rem) max(env(safe-area-inset-bottom), 1rem) max(env(safe-area-inset-left), 1rem);
     /* Ensure content fits */
     box-sizing: border-box;
     /* Ensure proper background handling */
     position: relative;
-    /* Allow scrolling when content overflows */
-    overflow-x: hidden;
-    overflow-y: auto;
+    /* Prevent scrolling for full-screen experience */
+    overflow: hidden;
   }
 
   /* Content wrapper for proper sizing */
@@ -368,19 +354,12 @@
       min-height: 100vh;
       min-height: -webkit-fill-available;
       min-height: 100dvh;
-      /* Remove any borders or margins */
-      border: none;
-      outline: none;
-      /* Ensure full coverage */
-      position: relative;
     }
     
-    /* Remove all body margins and padding in PWA mode */
-    html, body {
-      margin: 0 !important;
-      padding: 0 !important;
-      border: none !important;
-      outline: none !important;
+    /* Ensure screen container accounts for status bar in PWA */
+    .screen-container {
+      /* Adjust padding to account for black status bar */
+      padding-top: max(env(safe-area-inset-top, 44px), 1rem);
     }
   }
 
@@ -391,15 +370,7 @@
     }
     
     .screen-container {
-      padding: max(env(safe-area-inset-top), 0.75rem) max(env(safe-area-inset-right), 0.75rem) 0 max(env(safe-area-inset-left), 0.75rem);
-    }
-  }
-
-  /* PWA mobile specific fixes */
-  @media (max-width: 640px) and (display-mode: standalone) {
-    .screen-container {
-      /* No bottom padding in PWA mode on mobile */
-      padding: max(env(safe-area-inset-top), 0.75rem) max(env(safe-area-inset-right), 0.75rem) 0 max(env(safe-area-inset-left), 0.75rem);
+      padding: max(env(safe-area-inset-top), 0.75rem) max(env(safe-area-inset-right), 0.75rem) max(env(safe-area-inset-bottom), 0.75rem) max(env(safe-area-inset-left), 0.75rem);
     }
   }
 

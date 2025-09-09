@@ -13,12 +13,12 @@ const WelcomeScreen: React.FC = () => {
   return (
     <div className="screen-container animated-gradient-bg animate-fade-in">
       <div className="content-wrapper">
-        <div className="bg-black/40 backdrop-blur-md border border-white/20 rounded-3xl p-6 sm:p-8 md:p-10 max-w-md w-full shadow-2xl text-center space-y-6 sm:space-y-8 animate-fade-in-slow">
+        <div className="bg-black/40 backdrop-blur-md border border-black/50 rounded-3xl p-6 sm:p-8 md:p-10 max-w-md w-full shadow-2xl text-center space-y-6 sm:space-y-8 animate-fade-in-slow">
         {/* Logo */}
         <div className="flex justify-center mb-6 animate-fade-in">
           <div className="relative">
             <div className="absolute -inset-4 bg-gradient-to-r from-red-500/20 to-red-600/20 rounded-full blur-xl animate-pulse"></div>
-            <div className="relative bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-4 shadow-2xl">
+            <div className="relative bg-black/20 backdrop-blur-sm border border-black/40 rounded-2xl p-4 shadow-2xl">
               <img 
                 src="/logo.png?v=2" 
                 alt="36 MAF CLUB Logo" 
