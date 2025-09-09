@@ -193,6 +193,11 @@
       pointer-events: none;
     }
     
+    /* Remove bottom padding in PWA mode to eliminate black border */
+    .screen-container {
+      padding-bottom: 0 !important;
+    }
+    
     /* Prevent zoom on Android when focusing inputs */
     input, textarea, select {
       font-size: 16px;
