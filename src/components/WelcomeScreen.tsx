@@ -20,7 +20,7 @@ const WelcomeScreen: React.FC = () => {
             <div className="absolute -inset-4 bg-gradient-to-r from-red-500/20 to-red-600/20 rounded-full blur-xl animate-pulse"></div>
             <div className="relative bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-4 shadow-2xl">
               <img 
-                src="/logo.png" 
+                src="/logo.png?v=2" 
                 alt="36 MAF CLUB Logo" 
                 className="w-24 h-24 object-contain drop-shadow-lg"
               />
