@@ -70,7 +70,8 @@ const InfoModal: React.FC<InfoModalProps> = ({ isOpen, onClose }) => {
       icon: <Hammer className="w-4 h-4 sm:w-5 sm:h-5" />,
       title: 'Կայքի Թիմը',
       items: [
-        'Տիգրան Տիգրանյան ‒〘Կայքի Ստեղծող〙'
+        'Տիգրան Տիգրանյան ‒〘Կայքի Ստեղծող〙',
+        'YL | Club 36 ‒〘Կայքի Սեփականատեր〙'
       ]
     }
   ];
