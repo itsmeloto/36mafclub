@@ -11,8 +11,9 @@ const WelcomeScreen: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-6 animated-gradient-bg animate-fade-in">
-      <div className="bg-black/40 backdrop-blur-md border border-white/20 rounded-3xl p-10 max-w-md w-full shadow-2xl text-center space-y-8 animate-fade-in-slow">
+    <div className="screen-container animated-gradient-bg animate-fade-in">
+      <div className="content-wrapper">
+        <div className="bg-black/40 backdrop-blur-md border border-white/20 rounded-3xl p-6 sm:p-8 md:p-10 max-w-md w-full shadow-2xl text-center space-y-6 sm:space-y-8 animate-fade-in-slow">
         {/* Logo */}
         <div className="flex justify-center mb-6 animate-fade-in">
           <div className="relative">
@@ -27,18 +28,19 @@ const WelcomeScreen: React.FC = () => {
           </div>
         </div>
         
-        <h1 className="text-5xl font-extrabold bg-gradient-to-r from-red-400 to-red-600 bg-clip-text text-transparent mb-4 animate-fade-in">
-          {armenianTexts.appTitle}
-        </h1>
-        <button
-          onClick={handlePlay}
-          className="relative group px-12 py-6 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white text-2xl font-bold rounded-2xl shadow-2xl transform transition-all duration-300 hover:scale-105 active:scale-95 animate-fade-in"
-        >
-          <div className="absolute -inset-1 bg-gradient-to-r from-red-600 to-red-800 rounded-2xl blur opacity-25 group-hover:opacity-75 transition duration-300"></div>
-          <span className="relative z-10">{armenianTexts.play}</span>
-        </button>
-        <div className="text-gray-400 text-base mt-8 animate-fade-in-slow">
-          {armenianTexts.producedBy}
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-red-400 to-red-600 bg-clip-text text-transparent mb-4 animate-fade-in">
+            {armenianTexts.appTitle}
+          </h1>
+          <button
+            onClick={handlePlay}
+            className="relative group px-8 sm:px-10 md:px-12 py-4 sm:py-5 md:py-6 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white text-lg sm:text-xl md:text-2xl font-bold rounded-2xl shadow-2xl transform transition-all duration-300 hover:scale-105 active:scale-95 animate-fade-in w-full max-w-xs"
+          >
+            <div className="absolute -inset-1 bg-gradient-to-r from-red-600 to-red-800 rounded-2xl blur opacity-25 group-hover:opacity-75 transition duration-300"></div>
+            <span className="relative z-10">{armenianTexts.play}</span>
+          </button>
+          <div className="text-gray-400 text-sm sm:text-base mt-6 sm:mt-8 animate-fade-in-slow">
+            {armenianTexts.producedBy}
+          </div>
         </div>
       </div>
     </div>
