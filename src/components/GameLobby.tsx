@@ -128,12 +128,16 @@ const GameLobby: React.FC = () => {
           paddingBottom: '6rem' // Extra padding for fixed navigation
         }}
       >
-      {/* Info Button - Fixed to top right */}
+      {/* Info Button - Fixed to top right with safe area support */}
       <button
         onClick={() => setShowInfo(true)}
-        className="fixed top-4 right-4 z-40 p-2 sm:p-3 bg-gray-800/80 hover:bg-gray-700/80 backdrop-blur-md border border-gray-600/50 rounded-xl transition-all duration-200 hover:scale-105 shadow-lg"
+        className="fixed z-50 p-2 sm:p-3 bg-gray-800/90 hover:bg-gray-700/90 backdrop-blur-md border border-gray-600/50 rounded-xl transition-all duration-200 hover:scale-105 shadow-xl"
+        style={{
+          top: 'max(env(safe-area-inset-top, 0px) + 1rem, 1rem)',
+          right: 'max(env(safe-area-inset-right, 0px) + 1rem, 1rem)'
+        }}
       >
-        <Info className="w-4 h-4 sm:w-5 sm:h-5 text-gray-300" />
+        <Info className="w-4 h-4 sm:w-5 sm:h-5 text-gray-200" />
       </button>
 
       {/* Header */}
