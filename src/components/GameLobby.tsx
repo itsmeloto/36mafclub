@@ -121,7 +121,13 @@ const GameLobby: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen p-2 sm:p-6 bg-gradient-to-br from-slate-900 via-red-950 to-black">
+    <div className="screen-container bg-gradient-to-br from-slate-900 via-red-950 to-black">
+      <div className="content-wrapper w-full max-w-4xl"
+        style={{ 
+          paddingTop: '1rem', 
+          paddingBottom: '6rem' // Extra padding for fixed navigation
+        }}
+      >
       {/* Header with Info Button */}
       <div className="relative text-center mb-4 sm:mb-8">
         <button
@@ -140,7 +146,7 @@ const GameLobby: React.FC = () => {
       </div>
 
       {/* Main Game Container */}
-      <div className="max-w-4xl mx-auto space-y-3 sm:space-y-6 pb-20 sm:pb-24">
+      <div className="w-full space-y-3 sm:space-y-6">
         {/* Active Players */}
         <div className="bg-black/30 backdrop-blur-md border border-white/20 rounded-xl sm:rounded-3xl p-3 sm:p-6 shadow-2xl">
           <h2 className="text-base sm:text-xl font-bold text-white mb-2 sm:mb-4 flex items-center armenian-text">
@@ -223,6 +229,8 @@ const GameLobby: React.FC = () => {
         </div>
       </div>
 
+      </div>
+      
       {/* Navigation Buttons - Fixed at bottom for mobile */}
       <div className="fixed bottom-0 left-0 right-0 p-2 sm:p-4 bg-gradient-to-t from-black/80 to-transparent backdrop-blur-sm">
         <div className="flex justify-between items-center max-w-4xl mx-auto">

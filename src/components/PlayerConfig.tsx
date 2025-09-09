@@ -17,8 +17,9 @@ const PlayerConfig: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-red-900 via-black to-black">
-      <div className="w-full max-w-md mx-auto">
+    <div className="screen-container animated-gradient-bg">
+      <div className="content-wrapper">
+        <div className="w-full max-w-md mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-red-400 to-red-600 bg-clip-text text-transparent mb-4">
@@ -107,6 +108,7 @@ const PlayerConfig: React.FC = () => {
           >
             ← {armenianTexts.back}
           </button>
+        </div>
         </div>
       </div>
     </div>

@@ -7,8 +7,9 @@ const HandoffScreen: React.FC = () => {
   const { setGamePhase } = useGame();
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-6 animated-gradient-bg">
-      <div className="bg-black/40 backdrop-blur-md border border-white/20 rounded-3xl p-10 max-w-lg w-full shadow-2xl text-center space-y-6">
+    <div className="screen-container animated-gradient-bg">
+      <div className="content-wrapper">
+        <div className="bg-black/40 backdrop-blur-md border border-white/20 rounded-3xl p-10 max-w-lg w-full shadow-2xl text-center space-y-6">
         <div className="flex items-center justify-center">
           <div className="p-4 rounded-2xl bg-purple-600/20 border border-purple-500/40 animate-fade-in">
             <ShieldCheck className="w-10 h-10 text-purple-300" />
@@ -28,6 +29,7 @@ const HandoffScreen: React.FC = () => {
           <span className="relative z-10">{armenianTexts.handoffContinue}</span>
           <ArrowRight className="w-5 h-5 relative z-10" />
         </button>
+        </div>
       </div>
     </div>
   );
