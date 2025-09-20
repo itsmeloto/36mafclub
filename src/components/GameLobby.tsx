@@ -98,7 +98,7 @@ const GameLobby: React.FC = () => {
       <div className={`relative transition-all duration-300 ${isEliminated ? 'opacity-50' : ''}`}>
         {/* Main Card - Clean design without sliding elements */}
         <div 
-          className={`bg-gradient-to-r from-slate-800/50 to-slate-900/50 backdrop-blur-sm border rounded-lg sm:rounded-xl p-2 sm:p-4 mb-1 sm:mb-3 transition-all duration-300 hover:border-white/30 cursor-pointer ${
+          className={`bg-gradient-to-r from-slate-800/50 to-slate-900/50 backdrop-blur-sm border rounded-lg sm:rounded-xl p-2 sm:p-3 mb-1 sm:mb-2 transition-all duration-300 hover:border-white/30 cursor-pointer ${
             isVoting ? 'border-red-500/70 shadow-red-500/20 shadow-lg' : 'border-white/10'
           } ${isEliminated ? 'bg-gray-800/30' : ''}`}
           onClick={() => !isEliminated && toggleVote(player.id)}
@@ -120,7 +120,7 @@ const GameLobby: React.FC = () => {
                 </span>
                 {isVoting && (
                   <div className="bg-gradient-to-r from-red-500 to-red-600 text-white px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full text-xs font-bold shadow-lg animate-pulse armenian-text">
-                    ՔՎԵԱՐԿՈՒԹՅՈՒՆ
+                    ԹԵԿՆԱՑՈՒԹՅՈՒՆ
                   </div>
                 )}
                 {isEliminated && (
@@ -167,43 +167,41 @@ const GameLobby: React.FC = () => {
           </div>
         </div>
 
-        {/* Enhanced Delete Confirmation Modal */}
+        {/* Compact Delete Confirmation Modal */}
         {showDeleteConfirm === player.id && (
           <div className="fixed inset-0 bg-black/90 backdrop-blur-md flex items-center justify-center z-50 p-4 animate-in fade-in duration-200">
-            <div className="bg-gradient-to-br from-gray-900/95 to-gray-800/95 border border-red-500/30 rounded-3xl p-8 max-w-sm w-full shadow-2xl animate-in zoom-in-95 duration-200">
+            <div className="bg-gradient-to-br from-gray-900/95 to-gray-800/95 border border-red-500/30 rounded-2xl p-6 max-w-xs w-full shadow-2xl animate-in zoom-in-95 duration-200">
               {/* Icon */}
-              <div className="flex justify-center mb-6">
-                <div className="w-16 h-16 bg-red-500/20 rounded-full flex items-center justify-center">
-                  <X className="w-8 h-8 text-red-400" />
+              <div className="flex justify-center mb-4">
+                <div className="w-12 h-12 bg-red-500/20 rounded-full flex items-center justify-center">
+                  <X className="w-6 h-6 text-red-400" />
                 </div>
               </div>
               
               {/* Title */}
-              <h3 className="text-2xl font-bold text-white mb-4 text-center armenian-text">
-                Հաստատել հեռացումը
+              <h3 className="text-lg font-bold text-white mb-3 text-center armenian-text">
+                Հեռացնել խաղացողին
               </h3>
               
               {/* Message */}
-              <p className="text-gray-300 mb-8 text-center armenian-text leading-relaxed">
-                Իսկապե՞ս ուզում եք հեռացնել <span className="font-bold text-white">{armenianTexts.player} {player.id}</span>-ին խաղից:
+              <p className="text-gray-300 mb-6 text-center armenian-text text-sm leading-relaxed">
+                Հեռացնել <span className="font-bold text-white">{armenianTexts.player} {player.id}</span>-ին:
               </p>
               
               {/* Buttons */}
-              <div className="flex space-x-4">
+              <div className="flex space-x-3">
                 <button
                   onClick={handleCancelDelete}
-                  className="flex-1 relative group px-6 py-4 bg-gradient-to-r from-gray-600 to-gray-700 hover:from-gray-500 hover:to-gray-600 text-white font-bold rounded-xl transition-all duration-200 hover:scale-105 active:scale-95 shadow-lg"
+                  className="flex-1 px-4 py-3 bg-gradient-to-r from-gray-600 to-gray-700 hover:from-gray-500 hover:to-gray-600 text-white font-medium rounded-lg transition-all duration-200 hover:scale-105 active:scale-95 shadow-lg text-sm"
                 >
-                  <div className="absolute -inset-1 bg-gradient-to-r from-gray-600 to-gray-800 rounded-xl blur opacity-25 group-hover:opacity-75 transition duration-300"></div>
-                  <span className="relative z-10 armenian-text">Չեղարկել</span>
+                  <span className="armenian-text">Չեղարկել</span>
                 </button>
                 
                 <button
                   onClick={handleConfirmDelete}
-                  className="flex-1 relative group px-6 py-4 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-bold rounded-xl transition-all duration-200 hover:scale-105 active:scale-95 shadow-lg"
+                  className="flex-1 px-4 py-3 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-medium rounded-lg transition-all duration-200 hover:scale-105 active:scale-95 shadow-lg text-sm"
                 >
-                  <div className="absolute -inset-1 bg-gradient-to-r from-red-600 to-red-800 rounded-xl blur opacity-25 group-hover:opacity-75 transition duration-300"></div>
-                  <span className="relative z-10 armenian-text">Հեռացնել</span>
+                  <span className="armenian-text">Հեռացնել</span>
                 </button>
               </div>
             </div>
@@ -246,12 +244,16 @@ const GameLobby: React.FC = () => {
 
       {/* Main Game Container */}
       <div className="w-full space-y-3 sm:space-y-6">
-        {/* Active Players */}
+        {/* Active Players - Optimized for 10 players */}
         <div className="bg-black/30 backdrop-blur-md border border-white/20 rounded-xl sm:rounded-3xl p-3 sm:p-6 shadow-2xl">
           <h2 className="text-base sm:text-xl font-bold text-white mb-2 sm:mb-4 flex items-center armenian-text">
             <span className="mr-1 sm:mr-2">👥</span> Ակտիվ Խաղացողներ ({activePlayers.length})
           </h2>
-          <div className="max-h-60 sm:max-h-96 overflow-y-auto space-y-1 sm:space-y-2 pr-1 sm:pr-2">
+          <div className={`space-y-1 sm:space-y-2 pr-1 sm:pr-2 ${
+            activePlayers.length > 10 
+              ? 'max-h-[580px] sm:max-h-[720px] overflow-y-auto' 
+              : 'min-h-[580px] sm:min-h-[720px]'
+          }`}>
             {activePlayers.map((player) => (
               <PlayerCard key={player.id} player={player} />
             ))}
