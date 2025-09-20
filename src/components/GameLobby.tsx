@@ -221,8 +221,7 @@ const GameLobby: React.FC = () => {
       >
 
       {/* Header */}
-      <div className="text-center mb-4 sm:mb-8">
-        
+      <div className="text-center mb-3 sm:mb-6">
         <h1 className="text-xl sm:text-4xl font-bold bg-gradient-to-r from-red-400 to-red-600 bg-clip-text text-transparent mb-1 sm:mb-2 armenian-text">
           {armenianTexts.gameLobby}
         </h1>
@@ -232,7 +231,7 @@ const GameLobby: React.FC = () => {
       </div>
 
       {/* Main Game Container */}
-      <div className="w-full space-y-3 sm:space-y-6">
+      <div className="w-full space-y-3 sm:space-y-4">
         {/* Active Players - Optimized for 10 players */}
         <div className="bg-black/30 backdrop-blur-md border border-white/20 rounded-xl sm:rounded-3xl p-3 sm:p-6 shadow-2xl">
           <h2 className="text-base sm:text-xl font-bold text-white mb-2 sm:mb-4 flex items-center armenian-text">
@@ -240,8 +239,8 @@ const GameLobby: React.FC = () => {
           </h2>
           <div className={`space-y-1 sm:space-y-2 pr-1 sm:pr-2 ${
             activePlayers.length > 10 
-              ? 'max-h-[620px] sm:max-h-[780px] overflow-y-auto' 
-              : 'min-h-[620px] sm:min-h-[780px]'
+              ? 'max-h-[680px] sm:max-h-[850px] overflow-y-auto' 
+              : 'min-h-[680px] sm:min-h-[850px]'
           }`}>
             {activePlayers.map((player) => (
               <PlayerCard key={player.id} player={player} />
@@ -250,57 +249,41 @@ const GameLobby: React.FC = () => {
         </div>
 
 
-        {/* Simplified Timer Section */}
-        <div className="bg-black/30 backdrop-blur-md border border-white/20 rounded-xl sm:rounded-3xl p-4 sm:p-5 shadow-2xl relative">
-          {/* Timer Header and Display */}
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-sm sm:text-lg font-bold text-white flex items-center armenian-text">
-              <Clock className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
-              Ժամանակաչափ
-            </h2>
-            
-            {/* Timer Display */}
-            <div className={`text-xl sm:text-3xl font-mono font-bold transition-all duration-300 ${
+        {/* Compact Timer Section */}
+        <div className="bg-black/30 backdrop-blur-md border border-white/20 rounded-xl sm:rounded-2xl p-3 sm:p-4 shadow-2xl relative">
+          {/* Timer Display - Centered */}
+          <div className="flex justify-center mb-3">
+            <div className={`text-2xl sm:text-4xl font-mono font-bold transition-all duration-300 ${
               gameState.timerSeconds <= 10 && gameState.timerSeconds > 0 ? 'text-red-400 animate-pulse' : 'text-white'
             }`}>
               {formatTime(gameState.timerSeconds)}
             </div>
           </div>
 
-          {/* Timer Progress Bar */}
-          <div className="w-full bg-gray-800 rounded-full h-2 sm:h-3 shadow-inner mb-4">
-            <div 
-              className={`h-2 sm:h-3 rounded-full transition-all duration-1000 shadow-lg ${
-                gameState.timerSeconds <= 10 && gameState.timerSeconds > 0 ? 'bg-gradient-to-r from-red-500 to-red-600 animate-pulse' : 'bg-gradient-to-r from-green-500 to-green-600'
-              }`}
-              style={{ width: `${Math.max(0, (gameState.timerSeconds / 60) * 100)}%` }}
-            ></div>
-          </div>
-
-          {/* Timer Controls */}
-          <div className="flex items-center justify-center space-x-3">
+          {/* Timer Controls - Centered */}
+          <div className="flex items-center justify-center space-x-4">
             <button
               onClick={startTimer}
               disabled={gameState.isTimerRunning}
               className="px-4 py-2 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-500 hover:to-green-600 disabled:from-gray-600 disabled:to-gray-700 disabled:opacity-50 text-white font-medium rounded-lg shadow-lg transition-all duration-200 hover:scale-105 active:scale-95 disabled:hover:scale-100 flex items-center"
             >
-              <Play className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
-              <span className="text-xs sm:text-sm armenian-text">{armenianTexts.startTimer}</span>
+              <Play className="w-4 h-4 mr-2" />
+              <span className="text-sm armenian-text">{armenianTexts.startTimer}</span>
             </button>
             
             <button
               onClick={resetTimer}
               className="px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white font-medium rounded-lg shadow-lg transition-all duration-200 hover:scale-105 active:scale-95 flex items-center"
             >
-              <RotateCcw className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
-              <span className="text-xs sm:text-sm armenian-text">{armenianTexts.resetTimer}</span>
+              <RotateCcw className="w-4 h-4 mr-2" />
+              <span className="text-sm armenian-text">{armenianTexts.resetTimer}</span>
             </button>
           </div>
 
           {/* Info Button - Bottom Right */}
           <button
             onClick={() => setShowInfo(true)}
-            className="absolute bottom-4 right-4 p-2 bg-gray-700/80 hover:bg-gray-600/80 backdrop-blur-md border border-gray-500/50 rounded-lg transition-all duration-200 hover:scale-105 shadow-lg"
+            className="absolute bottom-3 right-3 p-2 bg-gray-700/80 hover:bg-gray-600/80 backdrop-blur-md border border-gray-500/50 rounded-lg transition-all duration-200 hover:scale-105 shadow-lg"
           >
             <Info className="w-4 h-4 text-gray-200" />
           </button>
