@@ -21,7 +21,6 @@ const GameLobby: React.FC = () => {
   } = useGame();
 
   const [showInfo, setShowInfo] = useState(false);
-  const [swipedPlayerId, setSwipedPlayerId] = useState<number | null>(null);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState<number | null>(null);
 
   const formatTime = (seconds: number): string => {
@@ -35,7 +34,6 @@ const GameLobby: React.FC = () => {
   const PlayerCard: React.FC<{ player: Player }> = ({ player }) => {
     const isVoting = gameState.votingPlayers.includes(player.id);
     const isEliminated = player.isEliminated;
-    const isSwipedOut = swipedPlayerId === player.id;
 
     const handleTouchStart = (e: React.TouchEvent) => {
       if (isEliminated) return;
@@ -48,7 +46,7 @@ const GameLobby: React.FC = () => {
         const deltaX = startX - currentX;
         
         if (deltaX > 50) { // Swipe left threshold
-          setSwipedPlayerId(player.id);
+          setShowDeleteConfirm(player.id);
           document.removeEventListener('touchmove', handleTouchMove);
           document.removeEventListener('touchend', handleTouchEnd);
         }
@@ -72,7 +70,7 @@ const GameLobby: React.FC = () => {
         const deltaX = startX - currentX;
         
         if (deltaX > 50) { // Swipe left threshold
-          setSwipedPlayerId(player.id);
+          setShowDeleteConfirm(player.id);
           document.removeEventListener('mousemove', handleMouseMove);
           document.removeEventListener('mouseup', handleMouseUp);
         }
@@ -87,57 +85,26 @@ const GameLobby: React.FC = () => {
       document.addEventListener('mouseup', handleMouseUp);
     };
 
-    const handleDeleteClick = () => {
-      setShowDeleteConfirm(player.id);
-    };
-
     const handleConfirmDelete = () => {
       eliminatePlayer(player.id);
       setShowDeleteConfirm(null);
-      setSwipedPlayerId(null);
     };
 
     const handleCancelDelete = () => {
       setShowDeleteConfirm(null);
-      setSwipedPlayerId(null);
     };
 
     return (
-      <div className={`relative transition-all duration-300 ${isEliminated ? 'opacity-50' : ''} overflow-hidden`}>
-        {/* Delete Button Background */}
-        <div className={`absolute inset-0 bg-red-600 flex items-center justify-end pr-4 transition-all duration-300 ${
-          isSwipedOut ? 'translate-x-0' : 'translate-x-full'
-        }`}>
-          <button
-            onClick={handleDeleteClick}
-            className="bg-red-700 hover:bg-red-800 text-white px-4 py-2 rounded-lg font-bold transition-colors armenian-text"
-          >
-            Հեռացնել
-          </button>
-        </div>
-
-        {/* Main Card */}
+      <div className={`relative transition-all duration-300 ${isEliminated ? 'opacity-50' : ''}`}>
+        {/* Main Card - Clean design without sliding elements */}
         <div 
-          className={`bg-gradient-to-r from-slate-800/50 to-slate-900/50 backdrop-blur-sm border rounded-lg sm:rounded-xl p-2 sm:p-4 mb-1 sm:mb-3 transition-all duration-300 hover:border-white/30 cursor-pointer relative ${
+          className={`bg-gradient-to-r from-slate-800/50 to-slate-900/50 backdrop-blur-sm border rounded-lg sm:rounded-xl p-2 sm:p-4 mb-1 sm:mb-3 transition-all duration-300 hover:border-white/30 cursor-pointer ${
             isVoting ? 'border-red-500/70 shadow-red-500/20 shadow-lg' : 'border-white/10'
-          } ${isEliminated ? 'bg-gray-800/30' : ''} ${
-            isSwipedOut ? '-translate-x-20' : 'translate-x-0'
-          }`}
-          onClick={() => !isEliminated && !isSwipedOut && toggleVote(player.id)}
+          } ${isEliminated ? 'bg-gray-800/30' : ''}`}
+          onClick={() => !isEliminated && toggleVote(player.id)}
           onTouchStart={handleTouchStart}
           onMouseDown={handleMouseDown}
         >
-          {/* Reset swipe on tap */}
-          {isSwipedOut && (
-            <div 
-              className="absolute inset-0 bg-transparent z-10"
-              onClick={(e) => {
-                e.stopPropagation();
-                setSwipedPlayerId(null);
-              }}
-            />
-          )}
-
           <div className="flex items-center justify-between">
             {/* Player Info with Role */}
             <div className="flex flex-col sm:flex-row sm:items-center space-y-0.5 sm:space-y-0 sm:space-x-4 min-w-0 flex-1">
@@ -200,28 +167,43 @@ const GameLobby: React.FC = () => {
           </div>
         </div>
 
-        {/* Delete Confirmation Modal */}
+        {/* Enhanced Delete Confirmation Modal */}
         {showDeleteConfirm === player.id && (
-          <div className="fixed inset-0 bg-black/90 backdrop-blur-md flex items-center justify-center z-50 p-4">
-            <div className="bg-gray-900/95 border border-gray-700/50 rounded-2xl p-6 max-w-sm w-full shadow-2xl">
-              <h3 className="text-xl font-bold text-white mb-4 text-center armenian-text">
+          <div className="fixed inset-0 bg-black/90 backdrop-blur-md flex items-center justify-center z-50 p-4 animate-in fade-in duration-200">
+            <div className="bg-gradient-to-br from-gray-900/95 to-gray-800/95 border border-red-500/30 rounded-3xl p-8 max-w-sm w-full shadow-2xl animate-in zoom-in-95 duration-200">
+              {/* Icon */}
+              <div className="flex justify-center mb-6">
+                <div className="w-16 h-16 bg-red-500/20 rounded-full flex items-center justify-center">
+                  <X className="w-8 h-8 text-red-400" />
+                </div>
+              </div>
+              
+              {/* Title */}
+              <h3 className="text-2xl font-bold text-white mb-4 text-center armenian-text">
                 Հաստատել հեռացումը
               </h3>
-              <p className="text-gray-300 mb-6 text-center armenian-text">
-                Իսկապե՞ս ուզում եք հեռացնել {armenianTexts.player} {player.id}-ին:
+              
+              {/* Message */}
+              <p className="text-gray-300 mb-8 text-center armenian-text leading-relaxed">
+                Իսկապե՞ս ուզում եք հեռացնել <span className="font-bold text-white">{armenianTexts.player} {player.id}</span>-ին խաղից:
               </p>
-              <div className="flex space-x-3">
+              
+              {/* Buttons */}
+              <div className="flex space-x-4">
                 <button
                   onClick={handleCancelDelete}
-                  className="flex-1 px-4 py-3 bg-gray-600 hover:bg-gray-700 text-white font-medium rounded-lg transition-colors armenian-text"
+                  className="flex-1 relative group px-6 py-4 bg-gradient-to-r from-gray-600 to-gray-700 hover:from-gray-500 hover:to-gray-600 text-white font-bold rounded-xl transition-all duration-200 hover:scale-105 active:scale-95 shadow-lg"
                 >
-                  Չեղարկել
+                  <div className="absolute -inset-1 bg-gradient-to-r from-gray-600 to-gray-800 rounded-xl blur opacity-25 group-hover:opacity-75 transition duration-300"></div>
+                  <span className="relative z-10 armenian-text">Չեղարկել</span>
                 </button>
+                
                 <button
                   onClick={handleConfirmDelete}
-                  className="flex-1 px-4 py-3 bg-red-600 hover:bg-red-700 text-white font-medium rounded-lg transition-colors armenian-text"
+                  className="flex-1 relative group px-6 py-4 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-bold rounded-xl transition-all duration-200 hover:scale-105 active:scale-95 shadow-lg"
                 >
-                  Հեռացնել
+                  <div className="absolute -inset-1 bg-gradient-to-r from-red-600 to-red-800 rounded-xl blur opacity-25 group-hover:opacity-75 transition duration-300"></div>
+                  <span className="relative z-10 armenian-text">Հեռացնել</span>
                 </button>
               </div>
             </div>
