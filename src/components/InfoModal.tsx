@@ -53,7 +53,7 @@ const InfoModal: React.FC<InfoModalProps> = ({ isOpen, onClose }) => {
       items: [
         'Սեղմեք X կոճակը խաղացողին խաղից հեռացնելու համար',
         'Հեռացված խաղացողները չեն կարող քվեարկել կամ քվեարկության դրվել',
-        'Հեռացված խաղացողները ցուցադրվում են նվազեցված թափանցիկությամբ',
+        'Հեռացված խաղացողները հեռացվում են ակտիվ խաղացողների ցանկից',
         'Օգտագործեք սա այն խաղացողների համար, ովքեր քվեարկվել են կամ վերացվել են գիշերը'
       ]
     },
@@ -76,7 +76,7 @@ const InfoModal: React.FC<InfoModalProps> = ({ isOpen, onClose }) => {
     }
   ];
 
-  return (
+  return ( 
     <div className="fixed inset-0 bg-black/90 backdrop-blur-md flex items-center justify-center z-50 p-4">
       <div className="bg-gray-900/95 border border-gray-700/50 rounded-2xl max-w-2xl w-full max-h-[85vh] overflow-y-auto shadow-2xl">
         <div className="sticky top-0 bg-gray-900/95 border-b border-gray-700/50 p-4 flex items-center justify-between">

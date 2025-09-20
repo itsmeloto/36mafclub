@@ -29,7 +29,6 @@ const GameLobby: React.FC = () => {
   };
 
   const activePlayers = gameState.players.filter(player => !player.isEliminated);
-  const eliminatedPlayers = gameState.players.filter(player => player.isEliminated);
 
   const PlayerCard: React.FC<{ player: Player }> = ({ player }) => {
     const isVoting = gameState.votingPlayers.includes(player.id);
@@ -165,19 +164,6 @@ const GameLobby: React.FC = () => {
           </div>
         </div>
 
-        {/* Eliminated Players */}
-        {eliminatedPlayers.length > 0 && (
-          <div className="bg-black/30 backdrop-blur-md border border-white/20 rounded-xl sm:rounded-3xl p-3 sm:p-6 shadow-2xl">
-            <h2 className="text-base sm:text-xl font-bold text-gray-400 mb-2 sm:mb-4 flex items-center armenian-text">
-              <span className="mr-1 sm:mr-2">🚫</span> Հեռացված Խաղացողներ ({eliminatedPlayers.length})
-            </h2>
-            <div className="max-h-32 sm:max-h-48 overflow-y-auto space-y-1 sm:space-y-2 pr-1 sm:pr-2">
-              {eliminatedPlayers.map((player) => (
-                <PlayerCard key={player.id} player={player} />
-              ))}
-            </div>
-          </div>
-        )}
 
         {/* Timer Section */}
         <div className="bg-black/30 backdrop-blur-md border border-white/20 rounded-xl sm:rounded-3xl p-3 sm:p-6 shadow-2xl">
