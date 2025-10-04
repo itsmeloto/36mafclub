@@ -98,7 +98,7 @@ const GameLobby: React.FC = () => {
       <div className={`relative transition-all duration-300 ${isEliminated ? 'opacity-50' : ''}`}>
         {/* Main Card - Clean design without sliding elements */}
         <div 
-          className={`bg-gradient-to-r from-slate-800/50 to-slate-900/50 backdrop-blur-sm border rounded-lg sm:rounded-xl p-2 sm:p-3 mb-1 sm:mb-2 transition-all duration-300 hover:border-white/30 cursor-pointer ${
+          className={`bg-gradient-to-r from-slate-800/50 to-slate-900/50 backdrop-blur-sm border rounded-lg sm:rounded-xl p-1.5 sm:p-2 mb-0.5 sm:mb-1 transition-all duration-300 hover:border-white/30 cursor-pointer ${
             isVoting ? 'border-red-500/70 shadow-red-500/20 shadow-lg' : 'border-white/10'
           } ${isEliminated ? 'bg-gray-800/30' : ''}`}
           onClick={() => !isEliminated && toggleVote(player.id)}
@@ -107,47 +107,43 @@ const GameLobby: React.FC = () => {
         >
           <div className="flex items-center justify-between">
             {/* Player Info with Role */}
-            <div className="flex flex-col sm:flex-row sm:items-center space-y-0.5 sm:space-y-0 sm:space-x-4 min-w-0 flex-1">
-              <div className="flex items-center space-x-1 sm:space-x-2">
-                <span className="text-white font-bold text-sm sm:text-lg armenian-text">
-                  {armenianTexts.player} {player.id}
-                </span>
-                <span className="text-gray-400 hidden sm:inline">|</span>
-              </div>
-              <div className="flex items-center space-x-1 sm:space-x-2">
-                <span className={`font-semibold text-xs sm:text-base armenian-text ${getRoleColor(player.role)}`}>
-                  {getRoleDisplayName(player.role)}
-                </span>
-                {isVoting && (
-                  <div className="bg-gradient-to-r from-red-500 to-red-600 text-white px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full text-xs font-bold shadow-lg animate-pulse armenian-text">
-                    ԹԵԿՆԱՑՈՒԹՅՈՒՆ
-                  </div>
-                )}
-                {isEliminated && (
-                  <div className="bg-gradient-to-r from-gray-500 to-gray-600 text-white px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full text-xs font-bold armenian-text">
-                    ՎԵՐԱՑՎԱԾ
-                  </div>
-                )}
-              </div>
+            <div className="flex items-center space-x-2 sm:space-x-3 min-w-0 flex-1">
+              <span className="text-white font-bold text-sm sm:text-base armenian-text">
+                {armenianTexts.player} {player.id}
+              </span>
+              <span className="text-gray-400 hidden sm:inline">|</span>
+              <span className={`font-semibold text-xs sm:text-sm armenian-text ${getRoleColor(player.role)}`}>
+                {getRoleDisplayName(player.role)}
+              </span>
+              {isVoting && (
+                <div className="bg-gradient-to-r from-red-500 to-red-600 text-white px-1 sm:px-1.5 py-0.5 rounded-full text-xs font-bold shadow-lg animate-pulse armenian-text">
+                  ԹԵԿՆԱՑՈՒԹՅՈՒՆ
+                </div>
+              )}
+              {isEliminated && (
+                <div className="bg-gradient-to-r from-gray-500 to-gray-600 text-white px-1 sm:px-1.5 py-0.5 rounded-full text-xs font-bold armenian-text">
+                  ՎԵՐԱՑՎԱԾ
+                </div>
+              )}
             </div>
 
             {/* Controls */}
-            <div className="flex items-center space-x-1 sm:space-x-3 flex-shrink-0">
+            <div className="flex items-center space-x-1 sm:space-x-2 flex-shrink-0">
               {/* Warning System */}
-              <div className="flex items-center space-x-0.5 sm:space-x-2">
+              <div className="flex items-center space-x-0.5 sm:space-x-1">
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
                     removeWarning(player.id);
                   }}
                   disabled={player.warnings === 0 || isEliminated}
-                  className="w-6 h-6 sm:w-8 sm:h-8 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-400 hover:to-red-500 disabled:from-gray-600 disabled:to-gray-700 disabled:opacity-50 rounded-full flex items-center justify-center text-white font-bold transition-all duration-200 hover:scale-110 active:scale-95 disabled:hover:scale-100 shadow-lg"
+                  className="w-5 h-5 sm:w-6 sm:h-6 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-400 hover:to-red-500 disabled:from-gray-600 disabled:to-gray-700 disabled:opacity-50 rounded-full flex items-center justify-center text-white font-bold transition-all duration-200 hover:scale-110 active:scale-95 disabled:hover:scale-100 shadow-lg"
                 >
-                  <Minus className="w-2.5 h-2.5 sm:w-4 sm:h-4" />
+                  <Minus className="w-2 h-2 sm:w-3 sm:h-3" />
                 </button>
                 
-                <div className="bg-gradient-to-r from-slate-700 to-slate-800 px-1.5 sm:px-3 py-0.5 sm:py-1 rounded-md sm:rounded-lg border border-red-500/30 shadow-inner min-w-[24px] sm:min-w-[40px] text-center">
-                  <span className="text-white font-bold text-xs sm:text-base">
+                <div className="bg-gradient-to-r from-slate-700 to-slate-800 px-1 sm:px-2 py-0.5 rounded-md border border-red-500/30 shadow-inner min-w-[20px] sm:min-w-[28px] text-center">
+                  <span className="text-white font-bold text-xs sm:text-sm">
                     {player.warnings}
                   </span>
                 </div>
@@ -158,9 +154,9 @@ const GameLobby: React.FC = () => {
                     addWarning(player.id);
                   }}
                   disabled={player.warnings >= 3 || isEliminated}
-                  className="w-6 h-6 sm:w-8 sm:h-8 bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-400 hover:to-yellow-500 disabled:from-gray-600 disabled:to-gray-700 disabled:opacity-50 rounded-full flex items-center justify-center text-white font-bold transition-all duration-200 hover:scale-110 active:scale-95 disabled:hover:scale-100 shadow-lg"
+                  className="w-5 h-5 sm:w-6 sm:h-6 bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-400 hover:to-yellow-500 disabled:from-gray-600 disabled:to-gray-700 disabled:opacity-50 rounded-full flex items-center justify-center text-white font-bold transition-all duration-200 hover:scale-110 active:scale-95 disabled:hover:scale-100 shadow-lg"
                 >
-                  <Plus className="w-2.5 h-2.5 sm:w-4 sm:h-4" />
+                  <Plus className="w-2 h-2 sm:w-3 sm:h-3" />
                 </button>
               </div>
             </div>
@@ -215,96 +211,95 @@ const GameLobby: React.FC = () => {
     <div className="screen-container bg-gradient-to-br from-slate-900 via-red-950 to-black">
       <div className="content-wrapper w-full max-w-4xl"
         style={{ 
-          paddingTop: '1rem', 
-          paddingBottom: '6rem' // Extra padding for fixed navigation
+          paddingTop: '0.5rem', 
+          paddingBottom: '4rem' // Optimized for compact navigation
         }}
       >
 
-      {/* Header */}
-      <div className="text-center mb-3 sm:mb-4">
-        <h1 className="text-xl sm:text-4xl font-bold bg-gradient-to-r from-red-400 to-red-600 bg-clip-text text-transparent mb-1 sm:mb-2 armenian-text">
+      {/* Header - More compact */}
+      <div className="text-center mb-1 sm:mb-2">
+        <h1 className="text-lg sm:text-3xl font-bold bg-gradient-to-r from-red-400 to-red-600 bg-clip-text text-transparent mb-0.5 sm:mb-1 armenian-text">
           {armenianTexts.gameLobby}
         </h1>
-        <p className="text-gray-300 text-xs sm:text-base armenian-text">
+        <p className="text-gray-300 text-xs sm:text-sm armenian-text">
           Ընդամենը {gameState.totalPlayers} խաղացող
         </p>
       </div>
 
       {/* Main Game Container */}
-      <div className="w-full space-y-3">
-        {/* Active Players - Exactly 10 players visible */}
-        <div className="bg-black/30 backdrop-blur-md border border-white/20 rounded-xl sm:rounded-3xl p-3 sm:p-6 shadow-2xl">
-          <h2 className="text-base sm:text-xl font-bold text-white mb-2 sm:mb-4 flex items-center armenian-text">
-            <span className="mr-1 sm:mr-2">👥</span> Ակտիվ Խաղացողներ ({activePlayers.length})
+      <div className="w-full space-y-2">
+        {/* Active Players - No scrolling, fit all on screen */}
+        <div className="bg-black/30 backdrop-blur-md border border-white/20 rounded-xl p-2 sm:p-3 shadow-2xl">
+          <h2 className="text-sm sm:text-base font-bold text-white mb-1 sm:mb-2 flex items-center armenian-text">
+            <span className="mr-1">👥</span> Ակտիվ խաղացողներ ({activePlayers.length})
           </h2>
-          <div className="h-[540px] sm:h-[650px] overflow-y-auto space-y-1 sm:space-y-2 pr-1 sm:pr-2">
+          <div className="space-y-0.5 sm:space-y-1">
             {activePlayers.map((player) => (
               <PlayerCard key={player.id} player={player} />
             ))}
           </div>
         </div>
 
-
-        {/* Timer Section */}
-        <div className="bg-black/30 backdrop-blur-md border border-white/20 rounded-xl sm:rounded-2xl p-3 shadow-2xl relative">
-          {/* Timer Display - Centered */}
-          <div className="flex justify-center mb-3">
-            <div className={`text-2xl sm:text-3xl font-mono font-bold transition-all duration-300 ${
+        {/* Compact Timer Section */}
+        <div className="bg-black/30 backdrop-blur-md border border-white/20 rounded-xl p-2 sm:p-3 shadow-2xl">
+          <div className="flex items-center justify-between">
+            {/* Timer Display */}
+            <div className={`text-lg sm:text-xl font-mono font-bold transition-all duration-300 ${
               gameState.timerSeconds <= 10 && gameState.timerSeconds > 0 ? 'text-red-400 animate-pulse' : 'text-white'
             }`}>
               {formatTime(gameState.timerSeconds)}
             </div>
-          </div>
 
-          {/* Timer Controls - Side by Side Below */}
-          <div className="flex items-center justify-center space-x-4">
-            <button
-              onClick={startTimer}
-              disabled={gameState.isTimerRunning}
-              className="px-3 py-2 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-500 hover:to-green-600 disabled:from-gray-600 disabled:to-gray-700 disabled:opacity-50 text-white font-medium rounded-lg shadow-lg transition-all duration-200 hover:scale-105 active:scale-95 disabled:hover:scale-100 flex items-center"
-            >
-              <Play className="w-3 h-3 mr-1" />
-              <span className="text-xs armenian-text">{armenianTexts.startTimer}</span>
-            </button>
-            
-            <button
-              onClick={resetTimer}
-              className="px-3 py-2 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white font-medium rounded-lg shadow-lg transition-all duration-200 hover:scale-105 active:scale-95 flex items-center"
-            >
-              <RotateCcw className="w-3 h-3 mr-1" />
-              <span className="text-xs armenian-text">{armenianTexts.resetTimer}</span>
-            </button>
-          </div>
+            {/* Timer Controls */}
+            <div className="flex items-center space-x-2 sm:space-x-3">
+              <button
+                onClick={startTimer}
+                disabled={gameState.isTimerRunning}
+                className="px-2 py-1.5 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-500 hover:to-green-600 disabled:from-gray-600 disabled:to-gray-700 disabled:opacity-50 text-white font-medium rounded-md shadow-lg transition-all duration-200 hover:scale-105 active:scale-95 disabled:hover:scale-100 flex items-center"
+              >
+                <Play className="w-3 h-3 mr-1" />
+                <span className="text-xs armenian-text hidden sm:inline">{armenianTexts.startTimer}</span>
+              </button>
+              
+              <button
+                onClick={resetTimer}
+                className="px-2 py-1.5 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white font-medium rounded-md shadow-lg transition-all duration-200 hover:scale-105 active:scale-95 flex items-center"
+              >
+                <RotateCcw className="w-3 h-3 mr-1" />
+                <span className="text-xs armenian-text hidden sm:inline">{armenianTexts.resetTimer}</span>
+              </button>
 
-          {/* Info Button - Bottom Right */}
-          <button
-            onClick={() => setShowInfo(true)}
-            className="absolute bottom-2 right-2 p-1.5 bg-gray-700/80 hover:bg-gray-600/80 backdrop-blur-md border border-gray-500/50 rounded-lg transition-all duration-200 hover:scale-105 shadow-lg"
-          >
-            <Info className="w-3 h-3 text-gray-200" />
-          </button>
+              {/* Info Button */}
+              <button
+                onClick={() => setShowInfo(true)}
+                className="p-1.5 bg-gray-700/80 hover:bg-gray-600/80 backdrop-blur-md border border-gray-500/50 rounded-md transition-all duration-200 hover:scale-105 shadow-lg"
+              >
+                <Info className="w-3 h-3 text-gray-200" />
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
       </div>
       
       {/* Navigation Buttons - Fixed at bottom for mobile */}
-      <div className="fixed bottom-0 left-0 right-0 p-2 sm:p-4 bg-gradient-to-t from-black/80 to-transparent backdrop-blur-sm">
+      <div className="fixed bottom-0 left-0 right-0 p-1 sm:p-2 bg-gradient-to-t from-black/80 to-transparent backdrop-blur-sm">
         <div className="flex justify-between items-center max-w-4xl mx-auto">
           <button
             onClick={() => setGamePhase('roles')}
-            className="px-3 sm:px-6 py-2 sm:py-3 bg-black/50 backdrop-blur-md border border-white/20 rounded-lg sm:rounded-xl text-gray-300 hover:text-white transition-all duration-200 hover:bg-black/70 flex items-center"
+            className="px-2 sm:px-4 py-1.5 sm:py-2 bg-black/50 backdrop-blur-md border border-white/20 rounded-lg text-gray-300 hover:text-white transition-all duration-200 hover:bg-black/70 flex items-center"
           >
-            <ArrowLeft className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
-            <span className="text-xs sm:text-base armenian-text">{armenianTexts.back}</span>
+            <ArrowLeft className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
+            <span className="text-xs sm:text-sm armenian-text">{armenianTexts.back}</span>
           </button>
 
           <button
             onClick={endGame}
-            className="relative group px-3 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-500 hover:to-purple-600 text-white font-bold rounded-lg sm:rounded-xl shadow-lg transition-all duration-300 hover:scale-105 active:scale-95"
+            className="relative group px-2 sm:px-4 py-1.5 sm:py-2 bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-500 hover:to-purple-600 text-white font-bold rounded-lg shadow-lg transition-all duration-300 hover:scale-105 active:scale-95"
           >
-            <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-purple-800 rounded-lg sm:rounded-xl blur opacity-25 group-hover:opacity-75 transition duration-300"></div>
-            <span className="relative z-10 text-xs sm:text-base armenian-text">🏠 {armenianTexts.endGame}</span>
+            <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-purple-800 rounded-lg blur opacity-25 group-hover:opacity-75 transition duration-300"></div>
+            <span className="relative z-10 text-xs sm:text-sm armenian-text">🏠 {armenianTexts.endGame}</span>
           </button>
         </div>
       </div>
