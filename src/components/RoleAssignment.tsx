@@ -7,7 +7,6 @@ const RoleAssignment: React.FC = () => {
   const { 
     gameState, 
     revealRole, 
-    closeRole, 
     nextPlayer, 
     setGamePhase 
   } = useGame();
@@ -21,17 +20,7 @@ const RoleAssignment: React.FC = () => {
     }
   };
 
-  const handleCloseRole = () => {
-    if (currentPlayer) {
-      closeRole(currentPlayer.id);
-    }
-  };
-
   const handleNextPlayer = () => {
-    if (currentPlayer) {
-      closeRole(currentPlayer.id); // Auto-close current role
-    }
-    
     if (isLastPlayer) {
       setGamePhase('handoff');
     } else {
@@ -135,16 +124,18 @@ const RoleAssignment: React.FC = () => {
             {armenianTexts.player} {currentPlayer.id}
           </h2>
 
-          {/* View/Close Role Button */}
-          <button
-            onClick={currentPlayer.hasViewedRole ? handleCloseRole : handleViewRole}
-            className="relative group px-8 sm:px-10 md:px-12 py-4 sm:py-5 md:py-6 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white text-lg sm:text-xl font-bold rounded-2xl shadow-2xl transform transition-all duration-300 hover:scale-105 active:scale-95 w-full max-w-xs"
-          >
-            <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl blur opacity-25 group-hover:opacity-75 transition duration-300"></div>
-            <span className="relative z-10">
-              {currentPlayer.hasViewedRole ? armenianTexts.closeRole : armenianTexts.viewRole}
-            </span>
-          </button>
+          {/* View Role Button */}
+          {!currentPlayer.hasViewedRole && (
+            <button
+              onClick={handleViewRole}
+              className="relative group px-8 sm:px-10 md:px-12 py-4 sm:py-5 md:py-6 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white text-lg sm:text-xl font-bold rounded-2xl shadow-2xl transform transition-all duration-300 hover:scale-105 active:scale-95 w-full max-w-xs"
+            >
+              <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl blur opacity-25 group-hover:opacity-75 transition duration-300"></div>
+              <span className="relative z-10">
+                {armenianTexts.viewRole}
+              </span>
+            </button>
+          )}
 
         {/* Role Display */}
         {currentPlayer.hasViewedRole && (
