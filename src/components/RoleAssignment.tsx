@@ -74,18 +74,23 @@ const RoleAssignment: React.FC = () => {
 
   if (gameState.allRolesRevealed) {
     return (
-      <div className="screen-container bg-gradient-to-br from-slate-900 via-red-950 to-black">
+      <div className="screen-container bg-gradient-to-br from-slate-900 via-red-950 to-black animate-fade-in">
         <div className="content-wrapper">
-          <div className="text-center space-y-6 sm:space-y-8 bg-black/30 backdrop-blur-md border border-white/20 rounded-3xl p-6 sm:p-8 md:p-12 max-w-md w-full">
-            <h2 className="text-2xl sm:text-3xl font-bold text-white">
+          <div className="glass-card text-center space-y-8 p-8 sm:p-10 md:p-12 max-w-md w-full animate-scale-in">
+            <h2 className="font-bold text-white armenian-text" 
+                style={{ fontSize: 'clamp(1.5rem, 4vw, 2rem)', lineHeight: '1.3' }}>
               Բոլոր դերերը բացահայտված են
             </h2>
             <button
               onClick={handleStartGame}
-              className="relative group px-8 sm:px-10 md:px-12 py-4 sm:py-5 md:py-6 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-500 hover:to-green-600 text-white text-lg sm:text-xl font-bold rounded-2xl shadow-2xl transform transition-all duration-300 hover:scale-105 active:scale-95 w-full max-w-xs"
+              className="relative group w-full max-w-xs mx-auto touch-target"
+              aria-label="Սկսել խաղը"
             >
-              <div className="absolute -inset-1 bg-gradient-to-r from-green-600 to-green-800 rounded-2xl blur opacity-25 group-hover:opacity-75 transition duration-300"></div>
-              <span className="relative z-10">{armenianTexts.startGame}</span>
+              <div className="absolute -inset-1 bg-gradient-to-r from-green-600 to-green-800 rounded-2xl blur opacity-30 group-hover:opacity-75 transition-opacity duration-300"></div>
+              <span className="relative flex items-center justify-center px-10 py-5 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-500 hover:to-green-600 text-white font-bold rounded-2xl shadow-2xl smooth-transition group-hover:scale-105 group-active:scale-95 armenian-text"
+                    style={{ fontSize: 'clamp(1.125rem, 3vw, 1.25rem)' }}>
+                {armenianTexts.startGame}
+              </span>
             </button>
           </div>
         </div>
@@ -104,59 +109,67 @@ const RoleAssignment: React.FC = () => {
   }
 
   return (
-    <div className="screen-container relative bg-gradient-to-br from-slate-900 via-red-950 to-black">
-      {/* Pass Device Instructions */}
+    <div className="screen-container relative bg-gradient-to-br from-slate-900 via-red-950 to-black animate-fade-in">
+      {/* Pass Device Instructions - Enhanced visibility */}
       {gameState.currentPlayerIndex > 0 && (
-        <div className="absolute top-4 sm:top-6 md:top-8 left-1/2 transform -translate-x-1/2 text-center z-10">
-          <div className="bg-black/30 backdrop-blur-md px-4 sm:px-6 py-2 sm:py-3 rounded-2xl border border-white/20">
-            <p className="text-white text-sm sm:text-base md:text-lg font-medium">
+        <div className="absolute top-4 sm:top-6 md:top-8 left-1/2 transform -translate-x-1/2 text-center z-10 animate-slide-in-up px-4">
+          <div className="glass-card-light px-4 sm:px-6 py-2 sm:py-3">
+            <p className="text-white font-medium armenian-text" 
+               style={{ fontSize: 'clamp(0.875rem, 2vw, 1.125rem)' }}>
               {armenianTexts.passDeviceTo} {armenianTexts.player} {currentPlayer.id}
             </p>
           </div>
         </div>
       )}
 
-      {/* Main Content */}
+      {/* Main Content - Improved spacing and animations */}
       <div className="content-wrapper">
-        <div className="flex flex-col items-center space-y-6 sm:space-y-8 bg-black/30 backdrop-blur-md border border-white/20 rounded-3xl p-6 sm:p-8 md:p-12 max-w-md w-full">
-          {/* Current Player Display */}
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white text-center animate-fade-in">
+        <div className="glass-card flex flex-col items-center space-y-8 p-8 sm:p-10 md:p-12 max-w-md w-full animate-scale-in">
+          
+          {/* Current Player Display - Enhanced typography */}
+          <h2 className="font-bold text-white text-center animate-fade-in armenian-text" 
+              style={{ fontSize: 'clamp(1.75rem, 5vw, 2.5rem)', lineHeight: '1.2' }}>
             {armenianTexts.player} {currentPlayer.id}
           </h2>
 
-          {/* View Role Button */}
+          {/* View Role Button - Improved accessibility */}
           {!currentPlayer.hasViewedRole && (
             <button
               onClick={handleViewRole}
-              className="relative group px-8 sm:px-10 md:px-12 py-4 sm:py-5 md:py-6 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white text-lg sm:text-xl font-bold rounded-2xl shadow-2xl transform transition-all duration-300 hover:scale-105 active:scale-95 w-full max-w-xs"
+              className="relative group w-full max-w-xs touch-target animate-fade-in"
+              aria-label="Դիտել դերը"
             >
-              <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl blur opacity-25 group-hover:opacity-75 transition duration-300"></div>
-              <span className="relative z-10">
+              <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl blur opacity-30 group-hover:opacity-75 transition-opacity duration-300"></div>
+              <span className="relative flex items-center justify-center px-10 py-5 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white font-bold rounded-2xl shadow-2xl smooth-transition group-hover:scale-105 group-active:scale-95 armenian-text"
+                    style={{ fontSize: 'clamp(1.125rem, 3vw, 1.25rem)' }}>
                 {armenianTexts.viewRole}
               </span>
             </button>
           )}
 
-        {/* Role Display */}
-        {currentPlayer.hasViewedRole && (
-          <div className="text-center space-y-4 animate-fade-in">
-            <div className="flex items-center justify-center">
-              <div className={`text-3xl font-black drop-shadow-lg ${getRoleColor(currentPlayer.role)}`}>
-                {getRoleDisplayName(currentPlayer.role)}
+          {/* Role Display - Enhanced animation and sizing */}
+          {currentPlayer.hasViewedRole && (
+            <div className="text-center space-y-4 animate-scale-in">
+              <div className="flex items-center justify-center">
+                <div className={`font-black drop-shadow-2xl ${getRoleColor(currentPlayer.role)} armenian-text`}
+                     style={{ fontSize: 'clamp(2rem, 6vw, 3rem)' }}>
+                  {getRoleDisplayName(currentPlayer.role)}
+                </div>
+                <RoleAnimation role={currentPlayer.role} />
               </div>
-              <RoleAnimation role={currentPlayer.role} />
             </div>
-          </div>
-        )}
+          )}
 
-          {/* Next Player / Start Button */}
+          {/* Next Player / Start Button - Consistent styling */}
           {currentPlayer.hasViewedRole && (
             <button
               onClick={handleNextPlayer}
-              className="relative group px-6 sm:px-8 md:px-10 py-3 sm:py-4 bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-500 hover:to-purple-600 text-white text-base sm:text-lg font-bold rounded-xl shadow-xl transform transition-all duration-300 hover:scale-105 active:scale-95 w-full max-w-xs"
+              className="relative group w-full max-w-xs touch-target animate-fade-in"
+              aria-label={isLastPlayer ? "Սկսել խաղը" : "Հաջորդ խաղացող"}
             >
-              <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-purple-800 rounded-xl blur opacity-25 group-hover:opacity-75 transition duration-300"></div>
-              <span className="relative z-10">
+              <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-purple-800 rounded-xl blur opacity-30 group-hover:opacity-75 transition-opacity duration-300"></div>
+              <span className="relative flex items-center justify-center px-8 py-4 bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-500 hover:to-purple-600 text-white font-bold rounded-xl shadow-xl smooth-transition group-hover:scale-105 group-active:scale-95 armenian-text"
+                    style={{ fontSize: 'clamp(1rem, 2.5vw, 1.125rem)' }}>
                 {isLastPlayer ? armenianTexts.startGame : armenianTexts.nextPlayer}
               </span>
             </button>
@@ -164,17 +177,19 @@ const RoleAssignment: React.FC = () => {
         </div>
       </div>
 
-      {/* Back Button */}
+      {/* Back Button - Improved positioning and styling */}
       <button
         onClick={() => setGamePhase('config')}
-        className="absolute bottom-4 sm:bottom-6 md:bottom-8 left-4 sm:left-6 md:left-8 px-4 sm:px-6 py-2 text-gray-300 hover:text-white transition-colors duration-200 bg-black/20 backdrop-blur-sm rounded-lg border border-white/10 text-sm sm:text-base"
+        className="absolute bottom-4 sm:bottom-6 md:bottom-8 left-4 sm:left-6 md:left-8 btn-ghost armenian-text animate-fade-in"
+        aria-label="Վերադառնալ կարգավորումներ"
       >
         ← {armenianTexts.back}
       </button>
 
-      {/* Progress Indicator */}
-      <div className="absolute bottom-4 sm:bottom-6 md:bottom-8 right-4 sm:right-6 md:right-8 bg-black/20 backdrop-blur-sm px-3 sm:px-4 py-2 rounded-lg border border-white/10">
-        <span className="text-gray-300 text-sm sm:text-base">
+      {/* Progress Indicator - Enhanced readability */}
+      <div className="absolute bottom-4 sm:bottom-6 md:bottom-8 right-4 sm:right-6 md:right-8 glass-card-light px-4 py-2 animate-fade-in">
+        <span className="text-gray-200 font-medium tabular-nums" 
+              style={{ fontSize: 'clamp(0.875rem, 2vw, 1rem)' }}>
           {gameState.currentPlayerIndex + 1} / {gameState.totalPlayers}
         </span>
       </div>

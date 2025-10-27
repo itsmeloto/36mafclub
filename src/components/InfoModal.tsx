@@ -77,37 +77,55 @@ const InfoModal: React.FC<InfoModalProps> = ({ isOpen, onClose }) => {
   ];
 
   return ( 
-    <div className="fixed inset-0 bg-black/90 backdrop-blur-md flex items-center justify-center z-50 p-4">
-      <div className="bg-gray-900/95 border border-gray-700/50 rounded-2xl max-w-2xl w-full max-h-[85vh] overflow-y-auto shadow-2xl">
-        <div className="sticky top-0 bg-gray-900/95 border-b border-gray-700/50 p-4 flex items-center justify-between">
+    <div className="fixed inset-0 bg-black/95 backdrop-blur-lg flex items-center justify-center z-50 p-4 animate-fade-in-fast">
+      {/* Modal container with enhanced glass effect */}
+      <div className="bg-gray-900/95 backdrop-blur-md border border-gray-700/50 rounded-2xl max-w-2xl w-full max-h-[85vh] overflow-hidden shadow-2xl animate-scale-in">
+        
+        {/* Header - Sticky with better visual hierarchy */}
+        <div className="sticky top-0 bg-gray-900/98 backdrop-blur-sm border-b border-gray-700/50 p-4 sm:p-5 flex items-center justify-between z-10 shadow-lg">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-blue-500/20 rounded-lg">
+            {/* Icon with enhanced glow */}
+            <div className="p-2.5 bg-blue-500/20 border border-blue-500/30 rounded-lg shadow-lg">
               <Info className="w-5 h-5 text-blue-400" />
             </div>
-            <h2 className="text-lg font-bold text-white">Խաղի տեղեկություններ</h2>
+            <h2 className="font-bold text-white armenian-text" 
+                style={{ fontSize: 'clamp(1rem, 2.5vw, 1.25rem)' }}>
+              Խաղի տեղեկություններ
+            </h2>
           </div>
+          {/* Close button with better touch target */}
           <button
             onClick={onClose}
-            className="p-2 hover:bg-gray-800/50 rounded-lg transition-colors touch-manipulation"
+            className="touch-target p-2.5 hover:bg-gray-800/50 rounded-lg smooth-transition focus:outline-none focus:ring-2 focus:ring-gray-500"
+            aria-label="Փակել"
           >
-            <X className="w-5 h-5 text-gray-400" />
+            <X className="w-5 h-5 text-gray-400 hover:text-white transition-colors duration-200" />
           </button>
         </div>
 
-        <div className="p-4 space-y-6">
+        {/* Content area with smooth scrolling */}
+        <div className="p-5 sm:p-6 space-y-6 overflow-y-auto max-h-[calc(85vh-140px)] scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-gray-900">
           {sections.map((section, index) => (
-            <div key={index} className="space-y-3">
+            <div key={index} className="space-y-3 animate-fade-in" style={{ animationDelay: `${index * 0.05}s` }}>
+              {/* Section header */}
               <div className="flex items-center gap-3">
-                <div className="p-2 bg-purple-500/20 rounded-lg text-purple-400">
+                <div className="p-2.5 bg-purple-500/20 border border-purple-500/30 rounded-lg text-purple-400 shadow-md">
                   {section.icon}
                 </div>
-                <h3 className="text-base font-semibold text-white">{section.title}</h3>
+                <h3 className="font-semibold text-white armenian-text" 
+                    style={{ fontSize: 'clamp(0.9375rem, 2.25vw, 1.0625rem)' }}>
+                  {section.title}
+                </h3>
               </div>
-              <div className="ml-11 space-y-2">
+              {/* Section content */}
+              <div className="ml-11 space-y-3">
                 {section.items.map((item, itemIndex) => (
                   <div key={itemIndex} className="flex items-start gap-3">
                     <div className="w-1.5 h-1.5 bg-gray-500 rounded-full mt-2 flex-shrink-0"></div>
-                    <p className="text-gray-300 leading-relaxed text-sm">{item}</p>
+                    <p className="text-gray-200 leading-relaxed armenian-text" 
+                       style={{ fontSize: 'clamp(0.875rem, 2vw, 0.9375rem)' }}>
+                      {item}
+                    </p>
                   </div>
                 ))}
               </div>
@@ -115,11 +133,13 @@ const InfoModal: React.FC<InfoModalProps> = ({ isOpen, onClose }) => {
           ))}
         </div>
 
-        <div className="sticky bottom-0 bg-gray-900/95 border-t border-gray-700/50 p-4">
+        {/* Footer - Sticky with enhanced button */}
+        <div className="sticky bottom-0 bg-gray-900/98 backdrop-blur-sm border-t border-gray-700/50 p-4 sm:p-5 shadow-lg">
           <div className="flex justify-center">
             <button
               onClick={onClose}
-              className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors text-sm touch-manipulation"
+              className="touch-target px-8 py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white font-medium rounded-xl shadow-lg smooth-transition hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900 armenian-text"
+              style={{ fontSize: 'clamp(0.875rem, 2vw, 1rem)' }}
             >
               Հասկացա!
             </button>
