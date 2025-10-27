@@ -107,8 +107,8 @@ const GameLobby: React.FC = () => {
               : 'border-white/10 hover:border-white/30'
           } ${isEliminated ? 'bg-gray-800/40' : ''}`}
           style={{ 
-            padding: 'clamp(0.375rem, 1.2vh, 0.625rem)', // Reduced padding for tighter fit
-            minHeight: 'clamp(55px, 6.5vh, 75px)' // Slightly reduced height
+            padding: 'clamp(0.3rem, 1.1vh, 0.5rem)', // Further reduced padding for better fit
+            minHeight: 'clamp(50px, 6vh, 70px)' // Optimized height for 10-player layout
           }}
           onClick={() => !isEliminated && toggleVote(player.id)}
           onTouchStart={handleTouchStart(player.id, isEliminated)}
@@ -117,26 +117,28 @@ const GameLobby: React.FC = () => {
           <div className="flex items-center justify-between gap-2">
             {/* Player Info with Role - Compact layout with inline voting label */}
             <div className="flex flex-col gap-0.5 min-w-0 flex-1">
-              {/* Top row: Player name with inline voting badge (Թեկնածություն) */}
-              <div className="flex items-center gap-2 flex-wrap">
+              {/* Top row: Player name with inline voting badge (Թեկնածություն) next to name */}
+              <div className="flex items-center gap-1.5 flex-wrap">
                 <span className="text-white font-bold armenian-text whitespace-nowrap" 
-                      style={{ fontSize: 'clamp(0.8125rem, 1.9vw, 0.9375rem)' }}>
+                      style={{ fontSize: 'clamp(0.75rem, 1.85vw, 0.875rem)' }}>
                   {armenianTexts.player} {player.id}
                 </span>
+                {/* Voting label displayed inline next to player name with separator */}
                 {isVoting && (
                   <>
-                    <span className="text-gray-400" style={{ fontSize: 'clamp(0.75rem, 1.8vw, 0.875rem)' }}>|</span>
+                    <span className="text-gray-400" style={{ fontSize: 'clamp(0.6875rem, 1.75vw, 0.8125rem)' }}>|</span>
                     <span className="text-red-400 font-bold armenian-text animate-pulse"
-                          style={{ fontSize: 'clamp(0.6875rem, 1.7vw, 0.8125rem)' }}>
+                          style={{ fontSize: 'clamp(0.625rem, 1.65vw, 0.75rem)' }}>
                       ԹԵԿՆԱԾՈՒԹՅՈՒՆ
                     </span>
                   </>
                 )}
+                {/* Eliminated label displayed inline */}
                 {isEliminated && (
                   <>
-                    <span className="text-gray-400" style={{ fontSize: 'clamp(0.75rem, 1.8vw, 0.875rem)' }}>|</span>
+                    <span className="text-gray-400" style={{ fontSize: 'clamp(0.6875rem, 1.75vw, 0.8125rem)' }}>|</span>
                     <span className="text-gray-400 font-bold armenian-text"
-                          style={{ fontSize: 'clamp(0.6875rem, 1.7vw, 0.8125rem)' }}>
+                          style={{ fontSize: 'clamp(0.625rem, 1.65vw, 0.75rem)' }}>
                       ՎԵՐԱՑՎԱԾ
                     </span>
                   </>
@@ -144,14 +146,14 @@ const GameLobby: React.FC = () => {
               </div>
               {/* Bottom row: Role display with color */}
               <span className={`font-semibold armenian-text ${getRoleColor(player.role)}`}
-                    style={{ fontSize: 'clamp(0.6875rem, 1.7vw, 0.8125rem)' }}>
+                    style={{ fontSize: 'clamp(0.625rem, 1.65vw, 0.75rem)' }}>
                 {getRoleDisplayName(player.role)}
               </span>
             </div>
 
             {/* Warning Controls - Compact design for space efficiency */}
-            <div className="flex items-center gap-1 flex-shrink-0">
-              <div className="flex items-center gap-1">
+            <div className="flex items-center gap-0.5 flex-shrink-0">
+              <div className="flex items-center gap-0.5">
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
@@ -160,21 +162,21 @@ const GameLobby: React.FC = () => {
                   disabled={player.warnings === 0 || isEliminated}
                   className="touch-target bg-gradient-to-br from-red-500 to-red-600 hover:from-red-400 hover:to-red-500 disabled:from-gray-600 disabled:to-gray-700 disabled:opacity-50 rounded-full flex items-center justify-center text-white font-bold smooth-transition hover:scale-110 active:scale-95 disabled:hover:scale-100 shadow-lg focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-2 focus:ring-offset-black"
                   style={{ 
-                    width: 'clamp(26px, 3.8vw, 30px)',
-                    height: 'clamp(26px, 3.8vw, 30px)'
+                    width: 'clamp(24px, 3.6vw, 28px)',
+                    height: 'clamp(24px, 3.6vw, 28px)'
                   }}
                   aria-label="Նվազեցնել նախազգուշացումը"
                 >
-                  <Minus style={{ width: 'clamp(11px, 1.9vw, 13px)', height: 'clamp(11px, 1.9vw, 13px)' }} />
+                  <Minus style={{ width: 'clamp(10px, 1.8vw, 12px)', height: 'clamp(10px, 1.8vw, 12px)' }} />
                 </button>
                 
                 <div className="bg-gradient-to-r from-slate-700 to-slate-800 rounded-lg border border-red-500/30 shadow-inner text-center"
                      style={{ 
-                       padding: 'clamp(0.2rem, 0.9vh, 0.35rem) clamp(0.4rem, 1.4vw, 0.65rem)',
-                       minWidth: 'clamp(22px, 2.8vw, 30px)'
+                       padding: 'clamp(0.15rem, 0.8vh, 0.3rem) clamp(0.35rem, 1.3vw, 0.55rem)',
+                       minWidth: 'clamp(20px, 2.6vw, 28px)'
                      }}>
                   <span className="text-white font-bold tabular-nums" 
-                        style={{ fontSize: 'clamp(0.6875rem, 1.7vw, 0.8125rem)' }}>
+                        style={{ fontSize: 'clamp(0.625rem, 1.65vw, 0.75rem)' }}>
                     {player.warnings}
                   </span>
                 </div>
@@ -187,12 +189,12 @@ const GameLobby: React.FC = () => {
                   disabled={player.warnings >= 3 || isEliminated}
                   className="touch-target bg-gradient-to-br from-yellow-500 to-yellow-600 hover:from-yellow-400 hover:to-yellow-500 disabled:from-gray-600 disabled:to-gray-700 disabled:opacity-50 rounded-full flex items-center justify-center text-white font-bold smooth-transition hover:scale-110 active:scale-95 disabled:hover:scale-100 shadow-lg focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2 focus:ring-offset-black"
                   style={{ 
-                    width: 'clamp(26px, 3.8vw, 30px)',
-                    height: 'clamp(26px, 3.8vw, 30px)'
+                    width: 'clamp(24px, 3.6vw, 28px)',
+                    height: 'clamp(24px, 3.6vw, 28px)'
                   }}
                   aria-label="Ավելացնել նախազգուշացում"
                 >
-                  <Plus style={{ width: 'clamp(11px, 1.9vw, 13px)', height: 'clamp(11px, 1.9vw, 13px)' }} />
+                  <Plus style={{ width: 'clamp(10px, 1.8vw, 12px)', height: 'clamp(10px, 1.8vw, 12px)' }} />
                 </button>
               </div>
             </div>
@@ -207,49 +209,49 @@ const GameLobby: React.FC = () => {
       {/* Main content wrapper - Optimized spacing to fit all 10 players without scrolling */}
       <div className="content-wrapper w-full max-w-4xl flex flex-col flex-1"
         style={{ 
-          paddingTop: 'clamp(0.4rem, 0.9vh, 0.6rem)',
-          paddingLeft: 'clamp(0.5rem, 2vw, 1rem)',
-          paddingRight: 'clamp(0.5rem, 2vw, 1rem)',
-          paddingBottom: 'clamp(3.5rem, 8.5vh, 5.5rem)' // Safe spacing to prevent footer overlap
+          paddingTop: 'clamp(0.3rem, 0.7vh, 0.5rem)',
+          paddingLeft: 'clamp(0.5rem, 1.5vw, 0.875rem)',
+          paddingRight: 'clamp(0.5rem, 1.5vw, 0.875rem)',
+          paddingBottom: 'clamp(3.2rem, 7.5vh, 5rem)' // Safe spacing to prevent footer overlap
         }}
       >
 
       {/* Header - Compact design optimized for space efficiency */}
       <div className="text-center animate-slide-in-up"
-           style={{ marginBottom: 'clamp(0.375rem, 0.8vh, 0.5rem)' }}>
+           style={{ marginBottom: 'clamp(0.3rem, 0.6vh, 0.4rem)' }}>
         <h1 className="heading-gradient font-bold armenian-text" 
             style={{ 
-              fontSize: 'clamp(1rem, 3.2vw, 1.375rem)', 
+              fontSize: 'clamp(0.9375rem, 3vw, 1.25rem)', 
               lineHeight: '1.2',
-              marginBottom: 'clamp(0.2rem, 0.4vh, 0.375rem)'
+              marginBottom: 'clamp(0.15rem, 0.3vh, 0.3rem)'
             }}>
           {armenianTexts.gameLobby}
         </h1>
         <p className="text-gray-200 font-medium armenian-text" 
-           style={{ fontSize: 'clamp(0.6875rem, 1.7vw, 0.8125rem)' }}>
+           style={{ fontSize: 'clamp(0.625rem, 1.6vw, 0.75rem)' }}>
           Ընդամենը {gameState.totalPlayers} խաղացող
         </p>
       </div>
 
       {/* Main Game Container - Optimized to display all 10 players without scrolling */}
       <div className="w-full flex flex-col flex-1 min-h-0 animate-fade-in-slow"
-           style={{ gap: 'clamp(0.375rem, 0.8vh, 0.625rem)' }}>
+           style={{ gap: 'clamp(0.3rem, 0.7vh, 0.5rem)' }}>
         
         {/* Active Players Grid - Designed to fit all 10 players on screen simultaneously */}
         <div className="glass-card-light flex-1 min-h-0 flex flex-col animate-scale-in"
-             style={{ padding: 'clamp(0.375rem, 1.2vh, 0.75rem)' }}>
+             style={{ padding: 'clamp(0.3rem, 1vh, 0.625rem)' }}>
           <h2 className="font-bold text-white flex items-center armenian-text" 
               style={{ 
-                fontSize: 'clamp(0.8125rem, 2vw, 1rem)',
-                marginBottom: 'clamp(0.375rem, 0.8vh, 0.625rem)'
+                fontSize: 'clamp(0.75rem, 1.9vw, 0.9375rem)',
+                marginBottom: 'clamp(0.3rem, 0.7vh, 0.5rem)'
               }}>
-            <span className="mr-2" style={{ fontSize: 'clamp(0.9375rem, 2.3vw, 1.125rem)' }}>👥</span> 
+            <span className="mr-2" style={{ fontSize: 'clamp(0.875rem, 2.2vw, 1.0625rem)' }}>👥</span> 
             Ակտիվ խաղացողներ ({activePlayers.length})
           </h2>
           {/* Responsive grid: 2-column layout for efficient use of screen space, ensuring 10 players visible */}
           <div className="flex-1 min-h-0 grid auto-rows-fr"
                style={{ 
-                 gap: 'clamp(0.3rem, 0.8vh, 0.5rem)',
+                 gap: 'clamp(0.25rem, 0.7vh, 0.4rem)',
                  gridTemplateColumns: activePlayers.length <= 5 ? '1fr' : 'repeat(2, 1fr)',
                  gridTemplateRows: `repeat(${Math.ceil(activePlayers.length / (activePlayers.length <= 5 ? 1 : 2))}, minmax(0, 1fr))`
                }}>
@@ -263,44 +265,44 @@ const GameLobby: React.FC = () => {
 
         {/* Timer & Controls Section - Compact, always-visible design with Info button */}
         <div className="glass-card-light shadow-xl animate-slide-in-up"
-             style={{ padding: 'clamp(0.375rem, 1.2vh, 0.75rem)' }}>
+             style={{ padding: 'clamp(0.3rem, 1vh, 0.625rem)' }}>
           <div className="flex items-center justify-between flex-wrap"
-               style={{ gap: 'clamp(0.375rem, 1.5vw, 0.75rem)' }}>
+               style={{ gap: 'clamp(0.3rem, 1.2vw, 0.625rem)' }}>
             {/* Timer Display - Enhanced visibility with icon */}
             <div className="flex items-center"
-                 style={{ gap: 'clamp(0.3rem, 0.9vw, 0.5rem)' }}>
+                 style={{ gap: 'clamp(0.25rem, 0.8vw, 0.4rem)' }}>
               <Clock style={{ 
-                width: 'clamp(15px, 2.3vw, 18px)', 
-                height: 'clamp(15px, 2.3vw, 18px)' 
+                width: 'clamp(14px, 2.2vw, 17px)', 
+                height: 'clamp(14px, 2.2vw, 17px)' 
               }} className="text-gray-400" />
               <div className={`font-mono font-bold tabular-nums smooth-transition ${
                 gameState.timerSeconds <= 10 && gameState.timerSeconds > 0 
                   ? 'text-red-400 animate-pulse scale-110' 
                   : 'text-white'
-              }`} style={{ fontSize: 'clamp(1rem, 2.6vw, 1.375rem)' }}>
+              }`} style={{ fontSize: 'clamp(0.9375rem, 2.5vw, 1.25rem)' }}>
                 {formatTime(gameState.timerSeconds)}
               </div>
             </div>
 
             {/* Timer Controls with Info Button - All accessible and touch-friendly */}
             <div className="flex items-center"
-                 style={{ gap: 'clamp(0.3rem, 0.9vw, 0.5rem)' }}>
+                 style={{ gap: 'clamp(0.25rem, 0.8vw, 0.4rem)' }}>
               <button
                 onClick={startTimer}
                 disabled={gameState.isTimerRunning}
                 className="touch-target bg-gradient-to-r from-green-600 to-green-700 hover:from-green-500 hover:to-green-600 disabled:from-gray-600 disabled:to-gray-700 disabled:opacity-50 text-white font-medium rounded-lg shadow-lg smooth-transition hover:scale-105 active:scale-95 disabled:hover:scale-100 flex items-center focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-black"
                 style={{ 
-                  padding: 'clamp(0.35rem, 0.9vh, 0.55rem) clamp(0.45rem, 1.8vw, 0.7rem)'
+                  padding: 'clamp(0.3rem, 0.85vh, 0.5rem) clamp(0.4rem, 1.6vw, 0.625rem)'
                 }}
                 aria-label="Սկսել ժամանակաչափը"
               >
                 <Play style={{ 
-                  width: 'clamp(13px, 1.9vw, 15px)', 
-                  height: 'clamp(13px, 1.9vw, 15px)',
-                  marginRight: 'clamp(0.2rem, 0.8vw, 0.4rem)'
+                  width: 'clamp(12px, 1.8vw, 14px)', 
+                  height: 'clamp(12px, 1.8vw, 14px)',
+                  marginRight: 'clamp(0.15rem, 0.7vw, 0.35rem)'
                 }} />
                 <span className="armenian-text hidden sm:inline"
-                      style={{ fontSize: 'clamp(0.6875rem, 1.7vw, 0.8125rem)' }}>
+                      style={{ fontSize: 'clamp(0.625rem, 1.6vw, 0.75rem)' }}>
                   {armenianTexts.startTimer}
                 </span>
               </button>
@@ -309,17 +311,17 @@ const GameLobby: React.FC = () => {
                 onClick={resetTimer}
                 className="touch-target bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white font-medium rounded-lg shadow-lg smooth-transition hover:scale-105 active:scale-95 flex items-center focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-black"
                 style={{ 
-                  padding: 'clamp(0.35rem, 0.9vh, 0.55rem) clamp(0.45rem, 1.8vw, 0.7rem)'
+                  padding: 'clamp(0.3rem, 0.85vh, 0.5rem) clamp(0.4rem, 1.6vw, 0.625rem)'
                 }}
                 aria-label="Վերականգնել ժամանակաչափը"
               >
                 <RotateCcw style={{ 
-                  width: 'clamp(13px, 1.9vw, 15px)', 
-                  height: 'clamp(13px, 1.9vw, 15px)',
-                  marginRight: 'clamp(0.2rem, 0.8vw, 0.4rem)'
+                  width: 'clamp(12px, 1.8vw, 14px)', 
+                  height: 'clamp(12px, 1.8vw, 14px)',
+                  marginRight: 'clamp(0.15rem, 0.7vw, 0.35rem)'
                 }} />
                 <span className="armenian-text hidden sm:inline"
-                      style={{ fontSize: 'clamp(0.6875rem, 1.7vw, 0.8125rem)' }}>
+                      style={{ fontSize: 'clamp(0.625rem, 1.6vw, 0.75rem)' }}>
                   {armenianTexts.resetTimer}
                 </span>
               </button>
@@ -329,9 +331,9 @@ const GameLobby: React.FC = () => {
                 onClick={() => setShowInfo(true)}
                 className="touch-target bg-gray-700/90 hover:bg-gray-600/90 backdrop-blur-md border border-gray-500/50 rounded-lg smooth-transition hover:scale-105 active:scale-95 shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:ring-offset-black"
                 style={{ 
-                  padding: 'clamp(0.35rem, 0.9vh, 0.55rem)',
-                  minWidth: 'clamp(38px, 5vw, 44px)',
-                  minHeight: 'clamp(38px, 5vw, 44px)',
+                  padding: 'clamp(0.3rem, 0.85vh, 0.5rem)',
+                  minWidth: 'clamp(36px, 4.8vw, 42px)',
+                  minHeight: 'clamp(36px, 4.8vw, 42px)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center'
@@ -339,8 +341,8 @@ const GameLobby: React.FC = () => {
                 aria-label="Տեղեկատվություն"
               >
                 <Info style={{ 
-                  width: 'clamp(15px, 2.3vw, 18px)', 
-                  height: 'clamp(15px, 2.3vw, 18px)' 
+                  width: 'clamp(14px, 2.2vw, 17px)', 
+                  height: 'clamp(14px, 2.2vw, 17px)' 
                 }} className="text-gray-200" />
               </button>
             </div>
@@ -353,22 +355,22 @@ const GameLobby: React.FC = () => {
       {/* Navigation Footer - Fixed position with safe spacing to avoid overlap */}
       <div className="fixed bottom-0 left-0 right-0 bg-gradient-to-t from-black/95 via-black/80 to-transparent backdrop-blur-md border-t border-white/10 shadow-2xl animate-slide-in-up z-40"
            style={{ 
-             padding: 'clamp(0.5rem, 1.2vh, 0.75rem)',
-             paddingBottom: 'max(clamp(0.5rem, 1.2vh, 0.75rem), env(safe-area-inset-bottom))'
+             padding: 'clamp(0.4rem, 1vh, 0.625rem)',
+             paddingBottom: 'max(clamp(0.4rem, 1vh, 0.625rem), env(safe-area-inset-bottom))'
            }}>
         <div className="flex justify-between items-center max-w-4xl mx-auto"
-             style={{ gap: 'clamp(0.5rem, 2vw, 0.75rem)' }}>
+             style={{ gap: 'clamp(0.4rem, 1.5vw, 0.625rem)' }}>
           <button
             onClick={() => setGamePhase('roles')}
             className="touch-target btn-ghost flex items-center armenian-text"
-            style={{ gap: 'clamp(0.25rem, 1vw, 0.5rem)' }}
+            style={{ gap: 'clamp(0.2rem, 0.9vw, 0.4rem)' }}
             aria-label="Վերադառնալ դերերի բաշխում"
           >
             <ArrowLeft style={{ 
-              width: 'clamp(13px, 1.9vw, 15px)', 
-              height: 'clamp(13px, 1.9vw, 15px)' 
+              width: 'clamp(12px, 1.8vw, 14px)', 
+              height: 'clamp(12px, 1.8vw, 14px)' 
             }} />
-            <span style={{ fontSize: 'clamp(0.6875rem, 1.7vw, 0.8125rem)' }}>{armenianTexts.back}</span>
+            <span style={{ fontSize: 'clamp(0.625rem, 1.6vw, 0.75rem)' }}>{armenianTexts.back}</span>
           </button>
 
           <button
@@ -379,11 +381,11 @@ const GameLobby: React.FC = () => {
             <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-purple-800 rounded-lg blur opacity-30 group-hover:opacity-75 transition-opacity duration-300"></div>
             <span className="relative flex items-center rounded-lg shadow-lg smooth-transition group-hover:scale-105 group-active:scale-95 armenian-text bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-500 hover:to-purple-600 text-white font-bold"
                   style={{ 
-                    fontSize: 'clamp(0.6875rem, 1.7vw, 0.8125rem)',
-                    gap: 'clamp(0.2rem, 0.9vw, 0.35rem)',
-                    padding: 'clamp(0.35rem, 0.9vh, 0.5rem) clamp(0.7rem, 2.8vw, 1.4rem)'
+                    fontSize: 'clamp(0.625rem, 1.6vw, 0.75rem)',
+                    gap: 'clamp(0.15rem, 0.8vw, 0.3rem)',
+                    padding: 'clamp(0.3rem, 0.85vh, 0.45rem) clamp(0.625rem, 2.5vw, 1.25rem)'
                   }}>
-              <span style={{ fontSize: 'clamp(0.8125rem, 1.9vw, 0.9375rem)' }}>🏠</span>
+              <span style={{ fontSize: 'clamp(0.75rem, 1.85vw, 0.875rem)' }}>🏠</span>
               {armenianTexts.endGame}
             </span>
           </button>
